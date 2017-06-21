@@ -23,6 +23,9 @@ fi
 apt-get install -y php5.6 php5.6-mysql libapache2-mod-php5.6 sqlite3
 apt-get install -y php5.6-mcrypt php5.6-common php5.6-cli php5.6-ldap php5.6-json php5.6-xml
 
+# Setup MySQL database.
+mysql -uroot -proot -e "CREATE DATABASE campustours"
+
 # End of script. Add further commands as desired, e.g. creating a mysql database for the project.
 
 # Source of mysql password trick: 
