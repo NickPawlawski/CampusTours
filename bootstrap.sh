@@ -21,7 +21,7 @@ fi
 
 # Install PHP 5, PHP 5 apache module, and PHP modules.
 apt-get install -y php5.6 php5.6-mysql libapache2-mod-php5.6 sqlite3
-apt-get install -y php5.6-mcrypt php5.6-common php5.6-cli php5.6-ldap php5.6-json php5.6-xml
+apt-get install -y php5.6-mcrypt php5.6-common php5.6-cli php5.6-ldap php5.6-json php5.6-xml php5.6-curl
 
 # Setup MySQL database.
 mysql -uroot -proot -e "CREATE DATABASE campustours"
