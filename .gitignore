@@ -9,3 +9,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+ubuntu-xenial-16.04-cloudimg-console.log
+.gitignore
