@@ -7,6 +7,7 @@ use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 use App\User;
+use App\Tour;
 
 class AdminTest extends DuskTestCase
 {
@@ -25,6 +26,17 @@ class AdminTest extends DuskTestCase
                 ->assertSeeLink('Tours')
                 ->clickLink('Tours')
                 ->assertPathIs('/campustours2/admin/tours');
+        });
+    }
+
+    public function testToursPanel()
+    {
+        $tour = factory(Tour::class)->create();
+
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs($this->user)
+                ->visit('/admin/tours');
+                //->assertSee('<tr>'); // Assert that a table row exists for the tour
         });
     }
 }

@@ -25,3 +25,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'active' => true
     ];
 });
+
+$factory->define(App\Tour::class, function (Faker\Generator $faker) {
+    return [
+        'tourtime' => $faker->dateTime,
+    ];
+});
