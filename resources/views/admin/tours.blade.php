@@ -16,8 +16,8 @@
           <th>Date</th>
           <th>Time</th>
       </thead>
-      @foreach ($tours as $tour)
-          
-      @endforeach
+      <tbody>
+
+      </tbody>
   </table>
 @endsection
