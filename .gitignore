@@ -9,9 +9,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
-<<<<<<< HEAD
-ubuntu-xenial-16.04-cloudimg-console.log
-.gitignore
-=======
 **.swp
->>>>>>> e05d68d79d5517c267372a89f28a2257a4f24fec
+**/.DS_Store
