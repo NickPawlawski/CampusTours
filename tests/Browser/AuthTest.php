@@ -31,7 +31,7 @@ class AuthTest extends DuskTestCase
                 ->type('email', $this->user->email)
                 ->type('password', 'secret')
                 ->press('Login')
-                ->assertPathIs('/campustours2/home');
+                ->assertPathIs('/campustours2/admin');
         });
     }
 }
