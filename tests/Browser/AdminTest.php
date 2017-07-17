@@ -35,7 +35,9 @@ class AdminTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) {
             $browser->loginAs($this->user)
-                ->visit('/admin/tours');
+                ->visit('/admin/tours')
+                ->assertSee('Date')
+                ->assertSee('Time');
                 //->assertSee('<tr>'); // Assert that a table row exists for the tour
         });
     }
