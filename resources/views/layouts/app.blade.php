@@ -35,12 +35,8 @@
 <![endif]-->
 
 {{-- These are our css and js includes. The rest are included from the original page. --}}
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery-ui.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery-ui.structure.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery-ui.theme.min.css') }}">
-<script type="text/javascript" src="{{ asset('/js/jquery-ui.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/js/scripts.js') }}"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}"">
+{{-- <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script> --}}
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}""> --}}
 {{-- End of our loaded scripts --}}
 
 
