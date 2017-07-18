@@ -13,11 +13,12 @@
   <!-- Tours table -->
   <table>
       <thead>
-          <th>Date</th>
-          <th>Time</th>
+          <th>Tour Time</th>
       </thead>
       <tbody>
-
+          @foreach ($tours as $tour)
+            <tr><td>{{ $tour->tourtime->toDateTimeString() }}</td></tr>
+          @endforeach
       </tbody>
   </table>
 @endsection

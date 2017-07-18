@@ -31,14 +31,13 @@ class AdminTest extends DuskTestCase
 
     public function testToursPanel()
     {
-        $tour = factory(Tour::class)->create();
+        $this->tour = factory(Tour::class)->create();
 
         $this->browse(function (Browser $browser) {
             $browser->loginAs($this->user)
                 ->visit('/admin/tours')
-                ->assertSee('Date')
-                ->assertSee('Time');
-                //->assertSee('<tr>'); // Assert that a table row exists for the tour
+                ->assertSee('Tour Time')
+                ->assertSee($this->tour->tourtime->toDateTimeString()); // Assert that a table row exists for the tour
         });
     }
 }
