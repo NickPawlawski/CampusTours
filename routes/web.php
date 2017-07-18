@@ -26,5 +26,6 @@ Route::group([
         'prefix' => 'tours'
     ], function() {
         Route::get('/', 'TourController@index');
+        Route::post('/','TourController@create');
     });
 });

@@ -9,4 +9,11 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase
 {
+
+  public function testAuth()
+  {
+      $this->assertTrue(true);
+  }
+
+
 }
