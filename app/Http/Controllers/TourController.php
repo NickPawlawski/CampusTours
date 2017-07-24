@@ -10,7 +10,7 @@ use App\Tour;
 class TourController extends Controller
 {
     public function index() {
-        $tours = Tour::all();
+        $tours = Tour::orderBy('tourtime', 'desc')->paginate(15);
 
         return view('admin.tours', [
             'tours' => $tours,
