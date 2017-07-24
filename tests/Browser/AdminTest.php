@@ -28,16 +28,4 @@ class AdminTest extends DuskTestCase
                 ->assertPathIs('/campustours2/admin/tours');
         });
     }
-
-    public function testToursPanel()
-    {
-        $this->tour = factory(Tour::class)->create();
-
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs($this->user)
-                ->visit('/admin/tours')
-                ->assertSee('Tour Time')
-                ->assertSee($this->tour->tourtime->toDateTimeString()); // Assert that a table row exists for the tour
-        });
-    }
 }

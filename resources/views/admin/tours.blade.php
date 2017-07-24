@@ -13,9 +13,10 @@
       <!-- Add tour form -->
       <form>
         <label for="addDate">Add Tour
-          <input type="date" id="filterDate" name="filterDate"/>
-          <input type="time" id="filterTime" name="filterTime"/>
+          <input type="date" id="addDate" name="addDate"/>
+          <input type="time" id="addTime" name="addTime"/>
         </label>
+        <input class="button" type="submit" value="Add Tour">
       </form>
     </div>
 
