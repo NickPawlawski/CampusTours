@@ -28,6 +28,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Tour::class, function (Faker\Generator $faker) {
     return [
-        'tourtime' => $faker->dateTime,
+        'date' => $faker->date,
+        'time' => $faker->time
     ];
 });

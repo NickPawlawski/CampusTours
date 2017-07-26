@@ -17,7 +17,8 @@ class CreateToursTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->dateTime('tourtime');
+            $table->date('date');
+            $table->time('time');
         });
     }
 
