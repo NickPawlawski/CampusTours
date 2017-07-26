@@ -42,9 +42,9 @@ class TourController extends Controller
         return redirect()->action('TourController@index');
     }
 
-    public function show(Request $request)
+    public function show(Request $request, $id)
     {
-        $tour = Tour::find($request->id);
+        $tour = Tour::find($id);
 
         return view('admin.tours_show', [
             'tour' => $tour
