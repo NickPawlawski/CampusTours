@@ -51,7 +51,7 @@
               <td>{{ date('m/d/Y', $tour->date->timestamp) }}</td>
               <td>{{ date('h:i A', strtotime($tour->time)) }}</td>
               <td>
-                <form method="POST">
+                <form method="POST" action="{{ action('TourController@delete', ['id' => $tour->id]) }}">
                   {{ method_field('DELETE') }}
                   {{ csrf_field() }}
                   <a class="button tiny" href="{{ action('TourController@show', ['id' => $tour->id]) }}">?</a>

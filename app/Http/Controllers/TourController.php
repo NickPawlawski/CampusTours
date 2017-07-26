@@ -50,4 +50,11 @@ class TourController extends Controller
             'tour' => $tour
         ]);   
     }
+
+    public function delete(Request $request)
+    {
+        Tour::find($request->id)->delete();
+
+        return redirect()->action('TourController@index');
+    }
 }

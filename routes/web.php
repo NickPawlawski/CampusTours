@@ -28,5 +28,6 @@ Route::group([
         Route::get('/', 'TourController@index');
         Route::post('/','TourController@create');
         Route::get('/{id}', 'TourController@show');
+        Route::delete('/{id}', 'TourController@delete');
     });
 });
