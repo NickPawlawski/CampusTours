@@ -57,4 +57,22 @@ class TourController extends Controller
 
         return redirect()->action('TourController@index');
     }
+
+    public function deleted(Request $request)
+    {
+        $tours = Tour::onlyTrashed()->get();
+
+        return view('admin.tours_deleted', [
+                'tours' => $tours
+            ]);
+    }
+
+    public function restore(Request $request, $id)
+    {
+        $tour = Tour::withTrashed()->find($id);
+
+        $tour->restore();
+
+        return redirect()->back();
+    }
 }

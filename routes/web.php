@@ -27,7 +27,10 @@ Route::group([
     ], function() {
         Route::get('/', 'TourController@index');
         Route::post('/','TourController@create');
-        Route::get('/{id}', 'TourController@show');
         Route::delete('/{id}', 'TourController@delete');
+        // Deleted tours for restoration
+        Route::get('/deleted', 'TourController@deleted');
+        Route::get('/{id}', 'TourController@show');
+        Route::post('/{id}/restore', 'TourController@restore');
     });
 });
