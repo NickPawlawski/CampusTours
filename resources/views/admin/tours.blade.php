@@ -63,6 +63,8 @@
         </tbody>
       </table>
 
+      <a href="{{ action('TourController@deleted') }}">Restore Deleted Tours</a>
+
       {{ $tours->links() }}
     </div>
   </div>
