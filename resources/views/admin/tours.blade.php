@@ -11,6 +11,7 @@
           <label for="filterDate">By Date
             <input type="date" id="filterDate" name="filterDate"/>
           </label>
+          <input class="button" type="submit" value="Filter">
         </fieldset>
       </form>
 
@@ -40,14 +41,23 @@
     <div class="small-12 medium-6 column">
       <table>
         <thead>
-          <th width="200">Tour Time</th>
+          <th width="150">Tour Date</th>
+          <th width="150">Tour Time</th>
           <th width="150">Actions</th>
         </thead>
         <tbody>
           @foreach ($tours as $tour)
             <tr>
-              <td>{{ date('m/d/Y h:m A', $tour->tourtime->timestamp) }}</td>
-              <td>(action buttons)</td>
+              <td>{{ date('m/d/Y', $tour->date->timestamp) }}</td>
+              <td>{{ date('h:i A', strtotime($tour->time)) }}</td>
+              <td>
+                <form method="POST">
+                  {{ method_field('DELETE') }}
+                  {{ csrf_field() }}
+                  <a class="button tiny" href="{{ action('TourController@show', ['id' => $tour->id]) }}">?</a>
+                  <input class="button tiny" type="submit" value="X">
+                </form>
+              </td>
             </tr>
           @endforeach
         </tbody>

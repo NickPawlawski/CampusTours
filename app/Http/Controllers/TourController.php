@@ -8,8 +8,17 @@ use Carbon\Carbon;
 
 class TourController extends Controller
 {
-    public function index() {
-        $tours = Tour::orderBy('tourtime', 'desc')->paginate(15);
+    public function index(Request $request) {
+        $toursQuery = Tour::query();
+
+        if ($request->has('filterDate')) {
+            $toursQuery = $toursQuery->where('date', '=', $request->get('filterDate'));
+        }
+
+        $tours = $toursQuery
+            ->orderBy('time', 'desc')
+            ->orderBy('date', 'desc')
+            ->paginate(15);
 
         return view('admin.tours', [
             'tours' => $tours,
@@ -25,10 +34,20 @@ class TourController extends Controller
 
         // Create the new tour
         $tour = new Tour();
-        $tour->tourtime = new Carbon($request->get('addDate') . ' ' . $request->get('addTime'));
+        $tour->date = new Carbon($request->get('addDate'));
+        $tour->time = date('H:i:s', strtotime($request->get('addTime')));
         $tour->save();
 
         // Redirect to the main tours panel
         return redirect()->action('TourController@index');
+    }
+
+    public function show(Request $request)
+    {
+        $tour = Tour::find($request->id);
+
+        return view('admin.tours_show', [
+            'tour' => $tour
+        ]);   
     }
 }
