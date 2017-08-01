@@ -51,11 +51,11 @@
               <td>{{ date('m/d/Y', $tour->date->timestamp) }}</td>
               <td>{{ date('h:i A', strtotime($tour->time)) }}</td>
               <td>
-                <form method="POST" action="{{ action('TourController@delete', ['id' => $tour->id]) }}">
+                <form method="POST" action="{{ action('TourController@delete', ['id' => $tour->id]) }}" class="tour_delete">
                   {{ method_field('DELETE') }}
                   {{ csrf_field() }}
                   <a class="button tiny tour_show" href="{{ action('TourController@show', ['id' => $tour->id]) }}">?</a>
-                  <input class="button tiny tour_delete" type="submit" value="X">
+                  <input class="button tiny" type="submit" value="X">
                 </form>
               </td>
             </tr>
@@ -71,7 +71,7 @@
 
   <script>
     $(".tour_delete").on("submit", function() {
-      return confirm("Delete this checklist?");
+      return confirm("Delete this tour?");
     });
 
   </script>
