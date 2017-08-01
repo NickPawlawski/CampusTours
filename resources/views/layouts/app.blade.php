@@ -20,6 +20,11 @@
   <link rel="stylesheet" href="{{ asset('/css/wmuStyles/style4.css') }}" />
   <link rel="stylesheet" href="{{ asset('/css/wmuStyles/style5.css') }}" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,900,regular&amp;subset=latin" />
+  {{-- These are our css and js includes. The rest are included from the original page. --}}
+  {{-- <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script> --}}
+  {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}""> --}}
+  <script type="text/javascript" src="{{ asset('/js/jquery.js') }}"></script>
+  {{-- End of our loaded scripts --}}
   <script src="{{ asset('/js/wmuScripts/script1.js') }}"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
   <script>window.jQuery || document.write("<script src='/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js'>\x3C/script>")</script>
@@ -34,10 +39,7 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-{{-- These are our css and js includes. The rest are included from the original page. --}}
-{{-- <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script> --}}
-{{-- <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}""> --}}
-{{-- End of our loaded scripts --}}
+
 
 
 </head>
@@ -389,11 +391,11 @@
   <!--/.page -->
   <script src="{{ asset('/js/wmuScripts/script6.js') }}"></script>
   <script src="{{ asset('/js/wmuScripts/script7.js') }}"></script>
-  <script>
+  <!--<script>
 (function ($, Drupal, window, document, undefined) {
   $(document).foundation();
 })(jQuery, Drupal, this, this.document);
-  </script>
+  </script>-->
 </body>
 </html>
 

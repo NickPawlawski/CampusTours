@@ -54,8 +54,8 @@
                 <form method="POST" action="{{ action('TourController@delete', ['id' => $tour->id]) }}">
                   {{ method_field('DELETE') }}
                   {{ csrf_field() }}
-                  <a class="button tiny" href="{{ action('TourController@show', ['id' => $tour->id]) }}">?</a>
-                  <input class="button tiny" type="submit" value="X">
+                  <a class="button tiny tour_show" href="{{ action('TourController@show', ['id' => $tour->id]) }}">?</a>
+                  <input class="button tiny tour_delete" type="submit" value="X">
                 </form>
               </td>
             </tr>
@@ -68,4 +68,11 @@
       {{ $tours->links() }}
     </div>
   </div>
+
+  <script>
+    $(".tour_delete").on("submit", function() {
+      return confirm("Delete this checklist?");
+    });
+
+  </script>
 @endsection
