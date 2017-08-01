@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,900,regular&amp;subset=latin" />
   {{-- These are our css and js includes. The rest are included from the original page. --}}
   {{-- <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script> --}}
-  {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}""> --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}"">
   <script type="text/javascript" src="{{ asset('/js/jquery.js') }}"></script>
   {{-- End of our loaded scripts --}}
   <script src="{{ asset('/js/wmuScripts/script1.js') }}"></script>
