@@ -4,14 +4,17 @@
   <div class="row">
     <div class="small-12 medium-6 column">
       <!-- Filter tours form -->
-      <form>
+      <form method="GET" action="{{ action('TourController@index') }}">
         <fieldset>
           <legend>Filter Tours</legend>
-          {{ csrf_field() }}
-          <label for="filterDate">By Date
-            <input type="date" id="filterDate" name="filterDate"/>
+          <label for="filterDateStart">Start Date
+            <input type="date" id="filterDateStart" name="filterDateStart" value="{{ old('filterDateStart') }}"/>
+          </label>
+          <label for="filterDateEnd">End Date
+            <input type="date" id="filterDateEnd" name="filterDateEnd" value="{{ old('filterDateEnd') }}"/>
           </label>
           <input class="button" type="submit" value="Filter">
+          <a href="{{ action('TourController@index') }}" class="button alert">Clear Filter</a>
         </fieldset>
       </form>
 
@@ -41,9 +44,15 @@
     <div class="small-12 medium-6 column">
       <table>
         <thead>
-          <th width="150">Tour Date</th>
-          <th width="150">Tour Time</th>
-          <th width="150">Actions</th>
+          <th width="150">
+            Tour Date
+          </th>
+          <th width="150">
+            Tour Time
+          </th>
+          <th width="150">
+            Actions
+          </th>
         </thead>
         <tbody>
           @foreach ($tours as $tour)
@@ -70,9 +79,16 @@
   </div>
 
   <script>
+    /*$("#filterDateStart").on("blur", function() {
+      // If the start date is specified but the end date isn't, make them match.
+      if ($("#filterDateStart").val() !== '' && $("#filterDateEnd").val() === '') {
+        // Make the end date match the start.
+        $("#filterDateEnd").val($("#filterDateStart").val());
+      }
+    });*/
+
     $(".tour_delete").on("submit", function() {
       return confirm("Delete this tour?");
     });
-
   </script>
 @endsection

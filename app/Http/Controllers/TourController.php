@@ -11,11 +11,19 @@ class TourController extends Controller
     /* Shows a view containing a list of tours, along with
        forms for adding and filtering them. */
     public function index(Request $request) {
+        $this->validate($request, [
+                'filterDateStart' => 'date_or_empty',
+                'filterDateEnd' => 'date_or_empty',
+            ]);
+
         $toursQuery = Tour::query();
 
-        // If the tours are to be filtered by date, add this to the query.
-        if ($request->has('filterDate')) {
-            $toursQuery = $toursQuery->where('date', '=', $request->get('filterDate'));
+        if ($request->has('filterDateStart') && !empty($request->get('filterDateStart'))) {
+            $toursQuery = $toursQuery->where('date', '>=', $request->get('filterDateStart'));
+        }
+
+        if ($request->has('filterDateEnd') && !empty($request->get('filterDateEnd'))) {
+            $toursQuery = $toursQuery->where('date', '<=', $request->get('filterDateEnd'));
         }
 
         // Finish the query by sorting and paginating.
