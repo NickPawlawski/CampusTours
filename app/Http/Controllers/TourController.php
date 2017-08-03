@@ -11,23 +11,25 @@ class TourController extends Controller
     /* Shows a view containing a list of tours, along with
        forms for adding and filtering them. */
     public function index(Request $request) {
+        // Validate the start and end date inputs.
         $this->validate($request, [
                 'filterDateStart' => 'date_or_empty',
                 'filterDateEnd' => 'date_or_empty',
             ]);
 
-        $toursQuery = Tour::query();
+        // Set a default start and end date for queries.
+        $filterDateStart = $request->get('filterDateStart', date('Y-m-d'));
+        $filterDateEnd = $request->get('filterDateEnd', date('Y-m-d', strtotime('+3 months')));
 
-        if ($request->has('filterDateStart') && !empty($request->get('filterDateStart'))) {
-            $toursQuery = $toursQuery->where('date', '>=', $request->get('filterDateStart'));
+        // Ensure that the start date is before the end date.
+        if (strtotime($filterDateStart) > strtotime($filterDateEnd)) {
+            $temp = $filterDateStart;
+            $filterDateStart = $filterDateEnd;
+            $filterDateEnd = $temp;
         }
 
-        if ($request->has('filterDateEnd') && !empty($request->get('filterDateEnd'))) {
-            $toursQuery = $toursQuery->where('date', '<=', $request->get('filterDateEnd'));
-        }
-
-        // Finish the query by sorting and paginating.
-        $tours = $toursQuery
+        // Build a query including the start and end date, and ordering.
+        $tours = Tour::whereBetween('date', [$filterDateStart, $filterDateEnd])
             ->orderBy('time', 'desc')
             ->orderBy('date', 'desc')
             ->paginate(15);
@@ -35,6 +37,8 @@ class TourController extends Controller
         // Return the tours view.
         return view('admin.tours', [
             'tours' => $tours,
+            'filterDateStart' => $filterDateStart,
+            'filterDateEnd' => $filterDateEnd,
         ]);
     }
 

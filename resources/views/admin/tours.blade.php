@@ -8,10 +8,10 @@
         <fieldset>
           <legend>Filter Tours</legend>
           <label for="filterDateStart">Start Date
-            <input type="date" id="filterDateStart" name="filterDateStart" value="{{ old('filterDateStart') }}"/>
+            <input type="date" id="filterDateStart" name="filterDateStart" value="{{ $filterDateStart }}"/>
           </label>
           <label for="filterDateEnd">End Date
-            <input type="date" id="filterDateEnd" name="filterDateEnd" value="{{ old('filterDateEnd') }}"/>
+            <input type="date" id="filterDateEnd" name="filterDateEnd" value="{{ $filterDateEnd }}"/>
           </label>
           <input class="button" type="submit" value="Filter">
           <a href="{{ action('TourController@index') }}" class="button alert">Clear Filter</a>
@@ -74,7 +74,7 @@
 
       <a href="{{ action('TourController@deleted') }}">Restore Deleted Tours</a>
 
-      {{ $tours->links() }}
+      {{ $tours->appends(['filterDateStart' => $filterDateStart, 'filterDateEnd' => $filterDateEnd])->links() }}
     </div>
   </div>
 
