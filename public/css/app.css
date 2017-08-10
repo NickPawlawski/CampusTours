@@ -24,3 +24,18 @@ ul.breadcrumbs > li.current {
 ul.breadcrumbs > li.unavailable {
 
 }
+
+/* Fieldsets */
+fieldset {
+	margin-top: 0;
+}
+
+/* Buttons and Links styled as Buttons */
+a.button,
+a.button.alert,
+a.button.success,
+a.button.secondary,
+a.button.info,
+a.button.disabled {
+	border-radius: 0;
+}
