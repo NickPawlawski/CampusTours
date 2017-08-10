@@ -1,0 +1,26 @@
+/* Breadcrumb navigation */
+ul.breadcrumbs {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 1rem;
+}
+
+ul.breadcrumbs > li {
+	display: inline-block;
+	margin-right: 1rem;
+}
+
+ul.breadcrumbs > li:not(:last-child):after {
+	content: "➤";
+	margin-left: 1rem;
+	font-size: 0.25rem;
+}
+
+ul.breadcrumbs > li.current {
+	font-weight: bold;
+}
+
+ul.breadcrumbs > li.unavailable {
+
+}

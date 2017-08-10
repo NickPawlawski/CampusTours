@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+<ul class="breadcrumbs">
+    <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
+    <li><a href="{{ action('TourController@index') }}">Tours</a></li>
+    <li class="current"><a href="{{ action('TourController@deleted') }}">Deleted Tours</a></li>
+ </ul>
 <div class="row">
 	<div class="small-12 columns">
 		<table>
