@@ -42,6 +42,19 @@
           <input class="button" type="submit" value="Add Tour">
         </fieldset>
       </form>
+
+       <!-- Add multiple tours form -->
+      <form method="POST">
+        <fieldset>
+          <legend>Add Multiple Tours</legend>
+          {{ csrf_field() }}
+          <label for="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}">Start Date
+            <input type="date" id="addDateStart" name="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}" value="{{ old('addDateStart') }}"/>
+            @if ($errors->first('addDateStart'))
+              <small class="error">{{ $errors->first('addDateStart') }}</small>
+            @endif
+          </label>
+      </form>
     </div>
 
     <!-- Tours table -->

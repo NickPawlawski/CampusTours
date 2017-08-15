@@ -35,7 +35,7 @@ class TourController extends Controller
             ->paginate(15);
 
         // Return the tours view.
-        return view('admin.tours', [
+        return view('admin.tours.index', [
             'tours' => $tours,
             'filterDateStart' => $filterDateStart,
             'filterDateEnd' => $filterDateEnd,
@@ -67,7 +67,7 @@ class TourController extends Controller
     {
         $tour = Tour::find($id);
 
-        return view('admin.tours_show', [
+        return view('admin.tours.show', [
             'tour' => $tour
         ]);   
     }
@@ -85,7 +85,7 @@ class TourController extends Controller
     {
         $tours = Tour::onlyTrashed()->get();
 
-        return view('admin.tours_deleted', [
+        return view('admin.tours.deleted', [
                 'tours' => $tours
             ]);
     }
