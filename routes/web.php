@@ -33,4 +33,13 @@ Route::group([
         Route::get('/{id}', 'TourController@show');
         Route::post('/{id}/restore', 'TourController@restore');
     });
+
+    Route::resource('major','MajorsController');
+    Route::group([
+        'prefix' => 'major'
+    ], function() {
+        
+        Route::put('/make_visible','MajorsController@make_visible');
+        
+    });
 });
