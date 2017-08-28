@@ -64,7 +64,10 @@ class MajorsController extends Controller
 
     public function show(Request $request, $id)
     {
+        $major = Major::find($id);
         
+
+        return view('admin.major_show',['major' => $major]);
     }
 
 

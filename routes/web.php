@@ -34,9 +34,9 @@ Route::group([
         Route::post('/{id}/restore', 'TourController@restore');
     });
 
-    Route::resource('major','MajorsController');
+    Route::resource('majors','MajorsController');
     Route::group([
-        'prefix' => 'major'
+        'prefix' => 'majors'
     ], function() {
         
         Route::post('/make_visible','MajorsController@make_visible');

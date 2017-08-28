@@ -66,7 +66,7 @@
             </td>
 
             <td>    
-                <form method = "POST" action = "{{ route('major.destroy',['id'=>$major->id])}}">
+                <form method = "POST" action = "{{ route('majors.destroy',['id'=>$major->id])}}">
                 {{ method_field('DELETE') }}
                 {{ csrf_field() }}
                     <input class = "button" type = "submit" value = "Delete Major">
