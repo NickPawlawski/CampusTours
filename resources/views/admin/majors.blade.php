@@ -31,11 +31,27 @@
         <tr>
            <td>{{ $major->code }}</td>	
            <td>{{ $major->name }}</td>
-           <td>{{ $major->graduate }}</td>
-           <td>{{ $major->undergraduate }}</td>
+           
+           <td>
+            @if($major->graduate)
+            Yes
+            @else
+            No
+            @endif
+            </td>
+           
+           <td> 
+            @if($major->undergraduate)
+            Yes
+            @else
+            No
+            @endif   
+           </td>
+           
            <td>
              <form method="POST" action = "{{ action('MajorsController@make_visible') }}"> 
-             <input type = "hidden" name = "id" value = "$major->id">
+             {{ csrf_field() }}
+             <input type = "hidden" name = "id" value = "{{$major->id}}">
             
              @if($major->active == 1)
                    <input class = "button" type = "submit" value = "Make Inactive">
@@ -50,7 +66,9 @@
             </td>
 
             <td>    
-                <form method = "DELETE" action = "{{ action('MajorsController@destroy',['id'=>$major->id])}}">
+                <form method = "POST" action = "{{ route('major.destroy',['id'=>$major->id])}}">
+                {{ method_field('DELETE') }}
+                {{ csrf_field() }}
                     <input class = "button" type = "submit" value = "Delete Major">
                 </form>
             </td>
@@ -62,6 +80,7 @@
     <legend> Add Major </legend>
     <form method = "POST" action = "{{ action('MajorsController@store') }}">
     {{ csrf_field() }}
+    
     <table border="1" id="create_major_table">
       <thead>
         <th width="150"> Info </th>

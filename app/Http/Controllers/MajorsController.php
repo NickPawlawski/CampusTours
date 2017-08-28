@@ -32,6 +32,8 @@ class MajorsController extends Controller
 
         $major->name = $request->get('name');
         $major->code = $request->get('code');
+        $major->graduate = $request->exists('graduate');
+        $major->undergraduate = $request->exists('undergraduate');
         
         $major->save();
 
@@ -42,17 +44,27 @@ class MajorsController extends Controller
 
     public function make_visible(Request $request)
     {
+        $major = Major::find($request->get('id'));
 
+        $major->active = !$major->active;
+
+        $major->save();
+
+        return redirect()->action('MajorsController@index');
     }
 
     public function destroy(Request $request, $id)
     {
-        
+        $major = Major::find($id);
+
+        $major->delete();
+
+        return redirect()->action('MajorsController@index');
     }
 
     public function show(Request $request, $id)
     {
-
+        
     }
 
 

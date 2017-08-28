@@ -20,9 +20,9 @@ class CreateMajorsTable extends Migration
             $table->softDeletes();
             $table->string('name');
             $table->string('code');
-            $table->boolean('undergraduate');
-            $table->boolean('graduate');
-            $table->boolean('active');
+            $table->boolean('undergraduate')->default(false);
+            $table->boolean('graduate')->default(false);
+            $table->boolean('active')->default(true);
 
         });
     }

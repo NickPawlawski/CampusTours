@@ -39,7 +39,7 @@ Route::group([
         'prefix' => 'major'
     ], function() {
         
-        Route::put('/make_visible','MajorsController@make_visible');
+        Route::post('/make_visible','MajorsController@make_visible');
         
     });
 });
