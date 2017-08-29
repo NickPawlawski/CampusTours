@@ -42,4 +42,12 @@ Route::group([
         Route::post('/make_visible','MajorsController@make_visible');
         
     });
+
+
+    Route::resource('attendees','AttendeesController');
+    Route::group([
+        'prefix' => 'attendees'
+    ], function(){
+        
+    });
 });

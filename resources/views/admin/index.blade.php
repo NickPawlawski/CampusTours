@@ -8,6 +8,7 @@
 		<ul class="stack button-group">
 			<li><a class="button" href="{{ url('admin/tours') }}">Tours</a></li>
 			<li><a class="button" href="{{ url('admin/majors') }}">Majors</a></li>
+			<li><a class="button" href="{{ url('admin/attendees') }}">Attendees</a></li>
 		</ul>
 	</div>
 @endsection
