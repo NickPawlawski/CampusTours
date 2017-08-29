@@ -67,7 +67,27 @@ class MajorsController extends Controller
         $major = Major::find($id);
         
 
+        
         return view('admin.major_show',['major' => $major]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'code' => 'required'
+        ]);
+        
+        $major = Major::find($id);
+
+        $major->name = $request->get('name');
+        $major->code = $request->get('code');
+        $major->graduate = $request->exists('graduate');
+        $major->undergraduate = $request->exists('undergraduate');
+
+        $major->save();
+
+        return redirect()->action('MajorsController@index');
     }
 
 

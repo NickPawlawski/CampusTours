@@ -14,10 +14,10 @@
       <table border = "1" id="majors_table">
       <thead>
           <th width="150">
-            Code
+            Major Name
           </th>
           <th width="150">
-            Major Name
+            Code
           </th>
           <th width="150">
             Graduate
@@ -29,8 +29,9 @@
         <tbody>
         @foreach ($majors as $major)
         <tr>
-           <td>{{ $major->code }}</td>	
            <td>{{ $major->name }}</td>
+           <td>{{ $major->code }}</td>	
+           
            
            <td>
             @if($major->graduate)
