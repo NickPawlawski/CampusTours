@@ -43,7 +43,7 @@ class TourController extends Controller
     }
 
     /* Takes information about a new tour and creates it in the database. */
-    public function create(Request $request){
+    public function store(Request $request){
         // Validate the new date and time.
         $this->validate($request, [
                 'addDate' => 'required|date_format:Y-m-d',
@@ -59,6 +59,56 @@ class TourController extends Controller
         $tour->save();
 
         // Redirect to the main tours panel.
+        return redirect()->action('TourController@index');
+    }
+
+    public function storeMultiple(Request $request)
+    {
+        // Validate the dates and time.
+        $this->validate($request, [
+                'addDateStart' => 'required|date_format:Y-m-d',
+                'addDateEnd' => 'required|date_format:Y-m-d',
+                'addTimeMultiple' => 'required|date_format:H:i',
+                'addDateMonday' => 'boolean|required_without_all:addDateTuesday,addDateWednesday,addDateThursday,addDateFriday,addDateSaturday',
+                'addDateTuesday' => 'boolean|required_without_all:addDateMonday,addDateWednesday,addDateThursday,addDateFriday,addDateSaturday',
+                'addDateWednesday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateThursday,addDateFriday,addDateSaturday',
+                'addDateThursday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateWednesday,addDateFriday,addDateSaturday',
+                'addDateFriday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateWednesday,addDateThursday,addDateSaturday',
+                'addDateSaturday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateWednesday,addDateThursday,addDateFriday',
+            ]);
+
+        $startDate = new Carbon($request->get('addDateStart'));
+        $endDate = new Carbon($request->get('addDateEnd'));
+
+        // Ensure that the end date is 6 months after the start or sooner.
+        if ($startDate->copy()->addMonths(6)->lt($endDate)) {
+            $endDate = $startDate->copy()->addMonths(6);
+        }
+
+        // Verify that the start date is before the end date.
+        if ($startDate->lte($endDate)) {
+            // Current date to create a new instance of a tour with.
+            $currentDate = new Carbon($request->get('addDateStart'));
+
+            // Repeat adding a tour, following the repetition pattern, until we
+            // reach the end date.
+            do {
+                if ($currentDate->dayOfWeek == 1 && $request->get('addDateMonday')
+                        || $currentDate->dayOfWeek == 2 && $request->get('addDateTuesday')
+                        || $currentDate->dayOfWeek == 3 && $request->get('addDateWednesday')
+                        || $currentDate->dayOfWeek == 4 && $request->get('addDateThursday')
+                        || $currentDate->dayOfWeek == 5 && $request->get('addDateFriday')
+                        || $currentDate->dayOfWeek == 6 && $request->get('addDateSaturday')) {
+                    $tour = new Tour();
+                    $tour->date = $currentDate->copy();
+                    $tour->time = $request->get('addTimeMultiple');
+                    $tour->save();
+                }
+
+                $currentDate->addDay();
+            } while ($currentDate->lte($endDate));
+        }
+
         return redirect()->action('TourController@index');
     }
 

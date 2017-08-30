@@ -23,7 +23,7 @@
       </form>
 
       <!-- Add tour form -->
-      <form method="POST" action="{{ action('TourController@create') }}">
+      <form method="POST" action="{{ action('TourController@store') }}">
         <fieldset>
           <legend>Add Tour</legend>
           {{ csrf_field() }}
@@ -44,7 +44,7 @@
       </form>
 
        <!-- Add multiple tours form -->
-      <form method="POST">
+      <form method="POST" action="{{ action('TourController@storeMultiple') }}">
         <fieldset>
           <legend>Add Multiple Tours</legend>
           {{ csrf_field() }}
@@ -54,6 +54,40 @@
               <small class="error">{{ $errors->first('addDateStart') }}</small>
             @endif
           </label>
+          <label for="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}">End Date
+            <input type="date" id="addDateEnd" name="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}" value="{{ old('addDateEnd') }}"/>
+            @if ($errors->first('addDateEnd'))
+              <small class="error">{{ $errors->first('addDateEnd') }}</small>
+            @endif
+          </label>
+          <label for="addTimeMultiple" class="{{ $errors->first('addTimeMultiple') ? 'error' : '' }}">Tour Time
+            <input type="time" id="addTimeMultiple" name="addTimeMultiple" class="{{ $errors->first('addTimeMultiple') }}" value="{{ old('addTimeMultiple') }}"/>
+            @if ($errors->first('addTimeMultiple'))
+              <small class="error">{{ $errors->first('addTimeMultiple') }}</small>
+            @endif
+          </label>
+          <table>
+            <thead>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input id="addDateMonday" name="addDateMonday" type="checkbox"></td>
+                <td><input id="addDateTuesday" name="addDateTuesday" type="checkbox"></td>
+                <td><input id="addDateWednesday" name="addDateWednesday" type="checkbox"></td>
+                <td><input id="addDateThursday" name="addDateThursday" type="checkbox"></td>
+                <td><input id="addDateFriday" name="addDateFriday" type="checkbox"></td>
+                <td><input id="addDateSaturday" name="addDateSaturday" type="checkbox"></td>
+              </tr>
+            </tbody>
+          </table>
+          <input class="button" type="submit" value="Add Tours">
+        </fieldset>
       </form>
     </div>
 
