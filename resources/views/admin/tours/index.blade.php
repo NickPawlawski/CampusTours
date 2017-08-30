@@ -47,6 +47,16 @@
       <form method="POST" action="{{ action('TourController@storeMultiple') }}">
         <fieldset>
           <legend>Add Multiple Tours</legend>
+          @if (session('addMultipleWarning'))
+            <div class="warning">
+              {{ session('addMultipleWarning') }}
+            </div>
+          @endif
+          @if (session('addMultipleStatus'))
+            <div class="success">
+              {{ session('addMultipleStatus') }}
+            </div>
+          @endif
           {{ csrf_field() }}
           <label for="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}">Start Date
             <input type="date" id="addDateStart" name="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}" value="{{ old('addDateStart') }}"/>
@@ -77,12 +87,12 @@
             </thead>
             <tbody>
               <tr>
-                <td><input id="addDateMonday" name="addDateMonday" type="checkbox"></td>
-                <td><input id="addDateTuesday" name="addDateTuesday" type="checkbox"></td>
-                <td><input id="addDateWednesday" name="addDateWednesday" type="checkbox"></td>
-                <td><input id="addDateThursday" name="addDateThursday" type="checkbox"></td>
-                <td><input id="addDateFriday" name="addDateFriday" type="checkbox"></td>
-                <td><input id="addDateSaturday" name="addDateSaturday" type="checkbox"></td>
+                <td><input id="addDateMonday" name="addDayOfWeek[]" value="1" type="checkbox"></td>
+                <td><input id="addDateTuesday" name="addDayOfWeek[]" value="2" type="checkbox"></td>
+                <td><input id="addDateWednesday" name="addDayOfWeek[]" value="3" type="checkbox"></td>
+                <td><input id="addDateThursday" name="addDayOfWeek[]" value="4" type="checkbox"></td>
+                <td><input id="addDateFriday" name="addDayOfWeek[]" value="5" type="checkbox"></td>
+                <td><input id="addDateSaturday" name="addDayOfWeek[]" value="6" type="checkbox"></td>
               </tr>
             </tbody>
           </table>

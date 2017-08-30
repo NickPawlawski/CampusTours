@@ -62,6 +62,19 @@ class TourController extends Controller
         return redirect()->action('TourController@index');
     }
 
+    /* Creates a single tour from a date and time.
+     * 
+     * date: A carbon object that will be copied before storage.
+     * time: A string in the format H:i.
+     */
+    private function storeSingleTour($date, $time)
+    {
+        $tour = new Tour();
+        $tour->date = $date->copy();
+        $tour->time = $time;
+        $tour->save();
+    }
+
     public function storeMultiple(Request $request)
     {
         // Validate the dates and time.
@@ -69,16 +82,13 @@ class TourController extends Controller
                 'addDateStart' => 'required|date_format:Y-m-d',
                 'addDateEnd' => 'required|date_format:Y-m-d',
                 'addTimeMultiple' => 'required|date_format:H:i',
-                'addDateMonday' => 'boolean|required_without_all:addDateTuesday,addDateWednesday,addDateThursday,addDateFriday,addDateSaturday',
-                'addDateTuesday' => 'boolean|required_without_all:addDateMonday,addDateWednesday,addDateThursday,addDateFriday,addDateSaturday',
-                'addDateWednesday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateThursday,addDateFriday,addDateSaturday',
-                'addDateThursday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateWednesday,addDateFriday,addDateSaturday',
-                'addDateFriday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateWednesday,addDateThursday,addDateSaturday',
-                'addDateSaturday' => 'boolean|required_without_all:addDateMonday,addDateTuesday,addDateWednesday,addDateThursday,addDateFriday',
+                'addDayOfWeek' => 'required|array',
             ]);
 
         $startDate = new Carbon($request->get('addDateStart'));
         $endDate = new Carbon($request->get('addDateEnd'));
+        // Keep track of whether any tours were created.
+        $tourCount = 0;
 
         // Ensure that the end date is 6 months after the start or sooner.
         if ($startDate->copy()->addMonths(6)->lt($endDate)) {
@@ -87,26 +97,30 @@ class TourController extends Controller
 
         // Verify that the start date is before the end date.
         if ($startDate->lte($endDate)) {
-            // Current date to create a new instance of a tour with.
-            $currentDate = new Carbon($request->get('addDateStart'));
+            for ($day = 1; $day <= 6; $day += 1) {
+                // Current date to create a new instance of a tour with.
+                $currentDate = new Carbon($request->get('addDateStart'));
 
-            // Repeat adding a tour, following the repetition pattern, until we
-            // reach the end date.
-            do {
-                if ($currentDate->dayOfWeek == 1 && $request->get('addDateMonday')
-                        || $currentDate->dayOfWeek == 2 && $request->get('addDateTuesday')
-                        || $currentDate->dayOfWeek == 3 && $request->get('addDateWednesday')
-                        || $currentDate->dayOfWeek == 4 && $request->get('addDateThursday')
-                        || $currentDate->dayOfWeek == 5 && $request->get('addDateFriday')
-                        || $currentDate->dayOfWeek == 6 && $request->get('addDateSaturday')) {
-                    $tour = new Tour();
-                    $tour->date = $currentDate->copy();
-                    $tour->time = $request->get('addTimeMultiple');
-                    $tour->save();
+                if (in_array("$day", $request->get('addDayOfWeek'))) {
+                    $currentDate->next($day);
+
+                    while ($currentDate->lte($endDate)) {
+                        $this->storeSingleTour($currentDate, $request->get('addTimeMultiple'));
+                        $currentDate->next($day);
+                        $tourCount += 1;
+                    }
                 }
+            }
+        }
 
-                $currentDate->addDay();
-            } while ($currentDate->lte($endDate));
+        if ($tourCount == 0) {
+            $request->session()->flash('addMultipleWarning', 'No tours were created.');
+        } else {
+            $message = "$tourCount tours were created.";
+            if ($tourCount == 1) {
+                $message = "1 tour was created.";
+            }
+            $request->session()->flash('addMultipleStatus', $message);
         }
 
         return redirect()->action('TourController@index');
