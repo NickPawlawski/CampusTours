@@ -24,6 +24,8 @@ class AttendeesController extends Controller
       return view('admin.attendee_show',['attendee' => $attendee]);
   }
 
+  
+
 
 
 

@@ -24,11 +24,15 @@ class CreateAttendeesTable extends Migration
             $table->enum('studentType',['transfer','freshman','graduate','other']);
             $table->text('considerations');
             $table->integer('visitors');
+
+            $table->integer('tours_id')->unsigned()->nullable();
             
             $table->softDeletes();
 
         });
-    }
+
+        
+      }
 
     /**
      * Reverse the migrations.
@@ -38,5 +42,6 @@ class CreateAttendeesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('attendees');
+        
     }
 }

@@ -50,11 +50,11 @@
                 <label for="Graduate">Graduate</label>
             </td> 
             <td>
-								@if($major->graduate)
-									<input type = "checkbox" name = "graduate" checked = "checked">
-								@else
-									<input type = "checkbox" name = "graduate" >
-								@endif
+                @if($major->graduate)
+                    <input type = "checkbox" name = "graduate" checked = "checked">
+                @else
+                    <input type = "checkbox" name = "graduate" >
+                @endif
             </td>
         </tr>
 
@@ -63,12 +63,11 @@
             <label for="Undergraduate">Undergraduate</label>
             </td>    
             <td>   
-							@if($major->undergraduate)
-								<input type = "checkbox" name = "undergraduate" checked = "checked">
-							@else
-								<input type = "checkbox" name = "undergraduate">
-							@endif
-                
+                @if($major->undergraduate)
+                    <input type = "checkbox" name = "undergraduate" checked = "checked">
+                @else
+                    <input type = "checkbox" name = "undergraduate">
+                @endif
             </td>
         </tr>
     </tbody>
