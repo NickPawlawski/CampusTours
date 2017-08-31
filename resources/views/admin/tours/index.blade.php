@@ -23,7 +23,7 @@
       </form>
 
       <!-- Add tour form -->
-      <form method="POST" action="{{ action('TourController@create') }}">
+      <form method="POST" action="{{ action('TourController@store') }}">
         <fieldset>
           <legend>Add Tour</legend>
           {{ csrf_field() }}
@@ -40,6 +40,63 @@
             @endif
           </label>
           <input class="button" type="submit" value="Add Tour">
+        </fieldset>
+      </form>
+
+       <!-- Add multiple tours form -->
+      <form method="POST" action="{{ action('TourController@storeMultiple') }}">
+        <fieldset>
+          <legend>Add Multiple Tours</legend>
+          @if (session('addMultipleWarning'))
+            <div class="warning">
+              {{ session('addMultipleWarning') }}
+            </div>
+          @endif
+          @if (session('addMultipleStatus'))
+            <div class="success">
+              {{ session('addMultipleStatus') }}
+            </div>
+          @endif
+          {{ csrf_field() }}
+          <label for="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}">Start Date
+            <input type="date" id="addDateStart" name="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}" value="{{ old('addDateStart') }}"/>
+            @if ($errors->first('addDateStart'))
+              <small class="error">{{ $errors->first('addDateStart') }}</small>
+            @endif
+          </label>
+          <label for="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}">End Date
+            <input type="date" id="addDateEnd" name="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}" value="{{ old('addDateEnd') }}"/>
+            @if ($errors->first('addDateEnd'))
+              <small class="error">{{ $errors->first('addDateEnd') }}</small>
+            @endif
+          </label>
+          <label for="addTimeMultiple" class="{{ $errors->first('addTimeMultiple') ? 'error' : '' }}">Tour Time
+            <input type="time" id="addTimeMultiple" name="addTimeMultiple" class="{{ $errors->first('addTimeMultiple') }}" value="{{ old('addTimeMultiple') }}"/>
+            @if ($errors->first('addTimeMultiple'))
+              <small class="error">{{ $errors->first('addTimeMultiple') }}</small>
+            @endif
+          </label>
+          <table>
+            <thead>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input id="addDateMonday" name="addDayOfWeek[]" value="1" type="checkbox"></td>
+                <td><input id="addDateTuesday" name="addDayOfWeek[]" value="2" type="checkbox"></td>
+                <td><input id="addDateWednesday" name="addDayOfWeek[]" value="3" type="checkbox"></td>
+                <td><input id="addDateThursday" name="addDayOfWeek[]" value="4" type="checkbox"></td>
+                <td><input id="addDateFriday" name="addDayOfWeek[]" value="5" type="checkbox"></td>
+                <td><input id="addDateSaturday" name="addDayOfWeek[]" value="6" type="checkbox"></td>
+              </tr>
+            </tbody>
+          </table>
+          <input class="button" type="submit" value="Add Tours">
         </fieldset>
       </form>
     </div>

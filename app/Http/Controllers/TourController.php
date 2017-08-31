@@ -35,7 +35,7 @@ class TourController extends Controller
             ->paginate(15);
 
         // Return the tours view.
-        return view('admin.tours', [
+        return view('admin.tours.index', [
             'tours' => $tours,
             'filterDateStart' => $filterDateStart,
             'filterDateEnd' => $filterDateEnd,
@@ -43,7 +43,7 @@ class TourController extends Controller
     }
 
     /* Takes information about a new tour and creates it in the database. */
-    public function create(Request $request){
+    public function store(Request $request){
         // Validate the new date and time.
         $this->validate($request, [
                 'addDate' => 'required|date_format:Y-m-d',
@@ -62,12 +62,76 @@ class TourController extends Controller
         return redirect()->action('TourController@index');
     }
 
+    /* Creates a single tour from a date and time.
+     * 
+     * date: A carbon object that will be copied before storage.
+     * time: A string in the format H:i.
+     */
+    private function storeSingleTour($date, $time)
+    {
+        $tour = new Tour();
+        $tour->date = $date->copy();
+        $tour->time = $time;
+        $tour->save();
+    }
+
+    public function storeMultiple(Request $request)
+    {
+        // Validate the dates and time.
+        $this->validate($request, [
+                'addDateStart' => 'required|date_format:Y-m-d',
+                'addDateEnd' => 'required|date_format:Y-m-d',
+                'addTimeMultiple' => 'required|date_format:H:i',
+                'addDayOfWeek' => 'required|array',
+            ]);
+
+        $startDate = new Carbon($request->get('addDateStart'));
+        $endDate = new Carbon($request->get('addDateEnd'));
+        // Keep track of whether any tours were created.
+        $tourCount = 0;
+
+        // Ensure that the end date is 6 months after the start or sooner.
+        if ($startDate->copy()->addMonths(6)->lt($endDate)) {
+            $endDate = $startDate->copy()->addMonths(6);
+        }
+
+        // Verify that the start date is before the end date.
+        if ($startDate->lte($endDate)) {
+            for ($day = 1; $day <= 6; $day += 1) {
+                // Current date to create a new instance of a tour with.
+                $currentDate = new Carbon($request->get('addDateStart'));
+
+                if (in_array("$day", $request->get('addDayOfWeek'))) {
+                    $currentDate->next($day);
+
+                    while ($currentDate->lte($endDate)) {
+                        $this->storeSingleTour($currentDate, $request->get('addTimeMultiple'));
+                        $currentDate->next($day);
+                        $tourCount += 1;
+                    }
+                }
+            }
+        }
+
+        if ($tourCount == 0) {
+            $request->session()->flash('addMultipleWarning', 'No tours were created.');
+        } else {
+            $message = "$tourCount tours were created.";
+            if ($tourCount == 1) {
+                $message = "1 tour was created.";
+            }
+            $request->session()->flash('addMultipleStatus', $message);
+        }
+
+        return redirect()->action('TourController@index');
+    }
+
     /* Displays information about a tour. */
     public function show(Request $request, $id)
     {
         $tour = Tour::find($id);
 
-        return view('admin.tours_show', [
+        return view('admin.tours.show', [
             'tour' => $tour
         ]);   
     }
@@ -85,7 +149,7 @@ class TourController extends Controller
     {
         $tours = Tour::onlyTrashed()->get();
 
-        return view('admin.tours_deleted', [
+        return view('admin.tours.deleted', [
                 'tours' => $tours
             ]);
     }

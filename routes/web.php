@@ -28,7 +28,8 @@ Route::group([
         'prefix' => 'tours'
     ], function() {
         Route::get('/', 'TourController@index');
-        Route::post('/','TourController@create');
+        Route::post('/','TourController@store');
+        Route::post('/multiple', 'TourController@storeMultiple');
         Route::delete('/{id}', 'TourController@delete');
         // Deleted tours for restoration
         Route::get('/deleted', 'TourController@deleted');
