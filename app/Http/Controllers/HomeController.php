@@ -60,7 +60,8 @@ class HomeController extends Controller
         $attendee->considerations = $request->get('considerations');
         $attendee->visitors = $request->get('visitors');
 
-
+        
+        
         return view('home');
     }
 }
