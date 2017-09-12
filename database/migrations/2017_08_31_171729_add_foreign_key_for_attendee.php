@@ -15,7 +15,7 @@ class AddForeignKeyForAttendee extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::table('attendees', function ($table) {
-            $table->foreign('tours_id')->refrences('id')->on('tours');
+            $table->foreign('tours_id')->references('id')->on('tours');
         }); 
     }
 
