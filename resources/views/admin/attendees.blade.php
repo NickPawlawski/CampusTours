@@ -40,7 +40,7 @@
         <td>{{ $attendee->visitors }}</td>	
 
         <td>
-          <form menthod = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
+          <form method = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
             <input class = "button" type = "submit" value = "View Attendee">
         </td>
 
@@ -48,6 +48,10 @@
 
 
     </table>
+
+    <form method = "get" action = "{{route('student.status')}}">
+            <input class = "button" type = "submit" value = "View Attendee">
+
   </div>
 </div>
 

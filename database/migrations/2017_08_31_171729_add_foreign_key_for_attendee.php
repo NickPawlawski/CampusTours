@@ -26,6 +26,8 @@ class AddForeignKeyForAttendee extends Migration
      */
     public function down()
     {
-        Schema::dropForeign('attendees_tours_id_foreign');
+        Schema::table('attendees', function ($table) {
+            $table->dropForeign('attendees_tours_id_foreign');
+        }); 
     }
 }

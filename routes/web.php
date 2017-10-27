@@ -14,7 +14,6 @@
 Route::get('/', 'HomeController@index');
 Route::post('/','HomeController@store');
 
-
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
@@ -46,11 +45,14 @@ Route::group([
         
     });
 
-
     Route::resource('attendees','AttendeesController');
     Route::group([
-        'prefix' => 'attendees'
+        'prefix' => 'attendee'
     ], function(){
         
+        Route::get('/student_status','StudentStatusController@index')->name('student.status');
+        Route::put('/student_status/{id}','StudentStatusController@update')->name('student.status.update');
+        Route::delete('/student_status/{id}','StudentStatusController@delete')->name('student.status.delete');
+        Route::post('/student_status','StudentStatusController@create')->name('student.status.create');
     });
 });
