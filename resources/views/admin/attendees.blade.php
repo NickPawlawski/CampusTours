@@ -42,6 +42,7 @@
         <td>
           <form method = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
             <input class = "button" type = "submit" value = "View Attendee">
+            </form>
         </td>
 
         @endforeach
@@ -51,7 +52,7 @@
 
     <form method = "get" action = "{{route('student.status')}}">
             <input class = "button" type = "submit" value = "View Student Statuses">
-
+    </form>
   </div>
 </div>
 
