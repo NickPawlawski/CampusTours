@@ -32,3 +32,13 @@ $factory->define(App\Tour::class, function (Faker\Generator $faker) {
         'time' => $faker->time
     ];
 });
+
+$factory->define(App\Major::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'code' => $faker->word,
+        'undergraduate' => 1,
+        'graduate' => 0,
+        'active' => 1
+    ];
+});

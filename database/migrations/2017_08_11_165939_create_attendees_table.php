@@ -21,7 +21,7 @@ class CreateAttendeesTable extends Migration
             $table->string('lastName');
             $table->string('email');
             $table->string('phone');
-            $table->enum('studentType',['transfer','freshman','graduate','other']);
+            $table->integer('studentType');
             $table->text('considerations');
             $table->integer('visitors');
 

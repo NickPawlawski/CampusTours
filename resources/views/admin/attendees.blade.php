@@ -50,7 +50,7 @@
     </table>
 
     <form method = "get" action = "{{route('student.status')}}">
-            <input class = "button" type = "submit" value = "View Attendee">
+            <input class = "button" type = "submit" value = "View Student Statuses">
 
   </div>
 </div>
