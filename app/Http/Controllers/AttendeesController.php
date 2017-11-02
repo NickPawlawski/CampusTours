@@ -21,6 +21,7 @@ class AttendeesController extends Controller
   {
       $attendee = Attendee::find($id);
 
+      
       return view('admin.attendee_show',['attendee' => $attendee]);
   }
 
