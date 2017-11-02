@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web RoutesUs
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -23,6 +23,7 @@ Route::group([
     'prefix' => 'admin'
 ], function() {
     Route::get('/', 'HomeController@admin');
+    Route::resource('user', 'UserController');
 
     Route::group([
         'prefix' => 'tours'
@@ -52,5 +53,12 @@ Route::group([
         'prefix' => 'attendees'
     ], function(){
         
+    });
+
+    Route::resource('user','UserController');
+    Route::group([
+        'prefix' => 'user'
+    ], function(){
+
     });
 });

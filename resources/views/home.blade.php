@@ -21,6 +21,10 @@
             <input type="text" id="email" name="email" />
           </label>
 
+          <label for="email">Confirm Email Addfress
+            <input type="text" id="confirm_email" name="confirm_email">
+          </label>
+
           <label for="phone">Phone Number
             <input type="phone" id="phone" name="phone" />
           </label>

@@ -9,6 +9,7 @@
 			<li><a class="button" href="{{ url('admin/tours') }}">Tours</a></li>
 			<li><a class="button" href="{{ url('admin/majors') }}">Majors</a></li>
 			<li><a class="button" href="{{ url('admin/attendees') }}">Attendees</a></li>
+			<li><a class="button" href="{{ url('admin/user') }}">Users</a></li>
 		</ul>
 	</div>
 @endsection

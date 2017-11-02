@@ -66,8 +66,6 @@ class MajorsController extends Controller
     {
         $major = Major::find($id);
         
-
-        
         return view('admin.major_show',['major' => $major]);
     }
 
@@ -90,6 +88,4 @@ class MajorsController extends Controller
         return redirect()->action('MajorsController@index');
     }
 
-
 }
-
