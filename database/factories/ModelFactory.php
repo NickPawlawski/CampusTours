@@ -28,7 +28,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Tour::class, function (Faker\Generator $faker) {
     return [
-        'date' => $faker->date,
+        'date' => $faker->dateTimeBetween($startDate = '-1 Months', $endDate = '1 Months', $timezone = null),
         'time' => $faker->time
     ];
 });
@@ -40,5 +40,16 @@ $factory->define(App\Major::class, function (Faker\Generator $faker) {
         'undergraduate' => 1,
         'graduate' => 0,
         'active' => 1
+    ];
+});
+
+$factory->define(App\Attendee::class, function (Faker\Generator $faker) {
+    return [
+        'firstName' => $faker->firstName,
+        'lastName' => $faker->firstName,
+        'email' => $faker->unique()->safeEmail,
+        'visitors'=> $faker->randomDigit,
+        'phone' => $faker->tollFreePhoneNumber,
+        'considerations' => $faker->text
     ];
 });

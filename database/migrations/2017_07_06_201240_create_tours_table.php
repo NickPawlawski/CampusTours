@@ -15,11 +15,10 @@ class CreateToursTable extends Migration
     {
         Schema::create('tours', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->softDeletes();
-
             $table->date('date');
             $table->time('time');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -11,33 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        factory(App\User::class, 1)->create([
-            'email' => 'test@test.com',
-            'username' => 'test'
-        ]);
+        $this->call(MajorSeeder::class);
+        $this->call(StudentStatusSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(TourSeeder::class);
+        $this->call(AttendeeSeeder::class);
         
-        factory(\App\Major::class,1)->create([
-            'name' => 'Computer Science',
-            'code' => 'csg',
-            'undergraduate' => 1,
-            'graduate' => 1,
-            'active' => 1
-        ]);
-        factory(\App\Major::class,1)->create([
-            'name' => 'Other',
-            'code' => 'other',
-            'undergraduate' => 0,
-            'graduate' => 0,
-            'active' => 1
-        ]);
         
-        App\StudentStatus::insert([
-            ['name' => 'Transfer'],
-            ['name' => 'Undergraduate'],
-            ['name' => 'Graduate'],
-            ['name' => 'other']
-        ]);
+        
+        
+        
         
         
     }

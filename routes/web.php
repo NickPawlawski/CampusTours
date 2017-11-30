@@ -24,6 +24,9 @@ Route::group([
     Route::get('/', 'HomeController@admin');
     Route::resource('user', 'UserController');
 
+    Route::get('reportdate','GenerateReportController@index')->name('report.date');
+    Route::get('report','GenerateReportController@generate')->name('report');
+
     Route::group([
         'prefix' => 'tours'
     ], function() {
@@ -62,5 +65,7 @@ Route::group([
         'prefix' => 'user'
     ], function(){
 
+
+    
     });
 });

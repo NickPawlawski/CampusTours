@@ -15,10 +15,9 @@ class CreateStudentStatusTable extends Migration
     {
         Schema::create('student_status', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-
-            $table->softDeletes();
             $table->string('name');
+            $table->timestamps();
+            $table->softDeletes();
 
         });
     }

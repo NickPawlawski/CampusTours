@@ -15,7 +15,6 @@ class CreateAttendeesTable extends Migration
     {
         Schema::create('attendees', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
 
             $table->string('firstName');
             $table->string('lastName');
@@ -25,8 +24,9 @@ class CreateAttendeesTable extends Migration
             $table->text('considerations');
             $table->integer('visitors');
 
-            $table->integer('tours_id')->unsigned()->nullable();
+            $table->integer('tour_id')->unsigned()->nullable();
             
+            $table->timestamps();
             $table->softDeletes();
 
         });

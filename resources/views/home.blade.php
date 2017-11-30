@@ -4,7 +4,7 @@
     
 <div class="row">
 	<div class="small-12 columns">
-        <h1>Hello</h1>
+        <h1>Welcome to Floyd Campus Tours</h1>
         <form method = "POST" action = "{{ route('home.store') }}">
         {{ csrf_field() }}
 
@@ -95,17 +95,18 @@
         </fieldset>
 
         <fieldset>
-
-            <legend>Tour Selector</legend>
-            <select name = "tours">
-            @foreach($tours as $tour)
-                <option value = "{{$tour->id}}">{{date('Y-m-d', strtotime($tour->date))}}</option>
-            @endforeach 
-            @if($errors->has('tours'))
-              <span class = "error" >
-                <strong>{{$errors->first('tours')}}</strong>
-              </span>
-            @endif
+        <label for="tourDates">Select a Tour </label>
+          <input list="tourDates">
+            <datalist id="tourDates">
+              @foreach($tours as $tour)
+                <option >{{date('l, M d Y', strtotime($tour->date))}}</option>
+              @endforeach 
+            </datalist>
+              @if($errors->has('tours'))
+                <span class = "error" >
+                  <strong>{{$errors->first('tours')}}</strong>
+                </span>
+              @endif
             </select>
 
         </fieldset>         
