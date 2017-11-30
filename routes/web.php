@@ -33,6 +33,7 @@ Route::group([
         Route::get('/', 'TourController@index');
         Route::post('/','TourController@store');
         Route::post('/multiple', 'TourController@storeMultiple');
+        Route::delete('/deleteMult', 'TourController@deleteMultiple');
         Route::delete('/{id}', 'TourController@delete');
         // Deleted tours for restoration
         Route::get('/deleted', 'TourController@deleted');

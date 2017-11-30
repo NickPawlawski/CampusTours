@@ -45,7 +45,7 @@
 	</table>
 
 
-	<legend> Add User </legend>
+	<legend> Add Admin </legend>
 	<form method = "POST" action = "{{ route('user.store') }}">
 	{{ csrf_field() }}
 
