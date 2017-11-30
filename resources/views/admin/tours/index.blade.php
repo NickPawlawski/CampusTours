@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+  @if($errors->any())
+    @foreach($errors->all() as $error)
+      <p>{{$error}}</p>
+    @endforeach
+  @endif
   <ul class="breadcrumbs">
     <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
     <li class="current"><a href="{{ action('TourController@index') }}">Tours</a></li>
@@ -100,6 +105,45 @@
         </fieldset>
       </form>
     </div>
+
+    <!-- Delete Multiple tours form -->
+    <form method="POST" action="{{ action('TourController@deleteMultiple') }}">
+      {{ method_field('DELETE') }}
+      <fieldset>
+        <legend>Delete Multiple Tours</legend>
+        @if (session('deleteMultipleWarning'))
+          <div class="warning">
+            {{ session('deleteMultipleWarning') }}
+          </div>
+        @endif
+        @if (session('deleteMultipleStatus'))
+          <div class="success">
+            {{ session('deleteMultipleStatus') }}
+          </div>
+        @endif
+        {{ csrf_field() }}
+        <label for="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}">Start Date
+          <input type="date" id="addDateStart" name="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}" value="{{ old('addDateStart') }}"/>
+          @if ($errors->first('addDateStart'))
+            <small class="error">{{ $errors->first('addDateEnd') }}</small>
+          @endif
+        </label>
+        <label for="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}">End Date
+          <input type = "date" id="addDateEnd" name="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}" value="{{ old('addDateEnd') }}" />
+          @if ($errors->first('addDateEnd'))
+            <small class="error">{{ $errors->first('addDateEnd') }}</small>
+          @endif
+        </label>
+        <label for="deleteTimeMultiple" class="{{ $errors->first('deleteTimeMultiple') ? 'error' : '' }}">Tour Time
+          <input type="time" id="deleteTimeMultiple" name="deleteTimeMultiple" class="{{ $errors->first('deleteTimeMultiple') }}" value="{{ old('deleteTimeMultiple') }}"/>
+          @if ($errors->first('deleteTimeMultiple'))
+            <small class="error">{{ $errors->first('deleteTimeMultiple') }}</small>
+          @endif
+        </label>
+        <input class="button" type="submit" value="Delete Tours">
+      </fieldset>
+    </form>
+  </div>
 
     <!-- Tours table -->
     <div class="small-12 medium-6 column">
