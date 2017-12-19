@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  @if($errors->any())
-    @foreach($errors->all() as $error)
-      <p>{{$error}}</p>
-    @endforeach
-  @endif
   <ul class="breadcrumbs">
     <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
     <li class="current"><a href="{{ action('TourController@index') }}">Tours</a></li>
@@ -92,15 +87,18 @@
             </thead>
             <tbody>
               <tr>
-                <td><input id="addDateMonday" name="addDayOfWeek[]" value="1" type="checkbox"></td>
-                <td><input id="addDateTuesday" name="addDayOfWeek[]" value="2" type="checkbox"></td>
-                <td><input id="addDateWednesday" name="addDayOfWeek[]" value="3" type="checkbox"></td>
-                <td><input id="addDateThursday" name="addDayOfWeek[]" value="4" type="checkbox"></td>
-                <td><input id="addDateFriday" name="addDayOfWeek[]" value="5" type="checkbox"></td>
-                <td><input id="addDateSaturday" name="addDayOfWeek[]" value="6" type="checkbox"></td>
+                <td><input id="addDateMonday" name="addDayOfWeek[]" value="1" type="checkbox" class="{{ $errors->first('addDateCheckbox') }}"></td>
+                <td><input id="addDateTuesday" name="addDayOfWeek[]" value="2" type="checkbox" class="{{ $errors->first('addDateCheckbox') }}"></td>
+                <td><input id="addDateWednesday" name="addDayOfWeek[]" value="3" type="checkbox" class="{{ $errors->first('addDateCheckbox') }}"></td>
+                <td><input id="addDateThursday" name="addDayOfWeek[]" value="4" type="checkbox" class="{{ $errors->first('addDateCheckbox') }}"></td>
+                <td><input id="addDateFriday" name="addDayOfWeek[]" value="5" type="checkbox" class="{{ $errors->first('addDateCheckbox') }}"></td>
+                <td><input id="addDateSaturday" name="addDayOfWeek[]" value="6" type="checkbox" class="{{ $errors->first('addDateCheckbox') }}"></td>
               </tr>
             </tbody>
           </table>
+          @if($errors->first('addDateCheckbox'))
+            <small class="error">{{ $errors->first('addDateCheckbox') }}</small>
+          @endif
           <input class="button" type="submit" value="Add Tours">
         </fieldset>
       </form>
@@ -132,12 +130,6 @@
           <input type = "date" id="addDateEnd" name="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}" value="{{ old('addDateEnd') }}" />
           @if ($errors->first('addDateEnd'))
             <small class="error">{{ $errors->first('addDateEnd') }}</small>
-          @endif
-        </label>
-        <label for="deleteTimeMultiple" class="{{ $errors->first('deleteTimeMultiple') ? 'error' : '' }}">Tour Time
-          <input type="time" id="deleteTimeMultiple" name="deleteTimeMultiple" class="{{ $errors->first('deleteTimeMultiple') }}" value="{{ old('deleteTimeMultiple') }}"/>
-          @if ($errors->first('deleteTimeMultiple'))
-            <small class="error">{{ $errors->first('deleteTimeMultiple') }}</small>
           @endif
         </label>
         <input class="button" type="submit" value="Delete Tours">

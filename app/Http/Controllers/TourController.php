@@ -30,8 +30,8 @@ class TourController extends Controller
 
         // Build a query including the start and end date, and ordering.
         $tours = Tour::whereBetween('date', [$filterDateStart, $filterDateEnd])
-            ->orderBy('time', 'desc')
-            ->orderBy('date', 'desc')
+            ->orderBy('date')
+            ->orderBy('time')
             ->paginate(15);
 
         // Return the tours view.
@@ -80,26 +80,26 @@ class TourController extends Controller
         //validate the dates and time
         $this->validate($request, [
                 'addDateStart' => 'required|date_format:Y-m-d',
-                'addDateEnd' => 'required|date_format:Y-m-d',
-                'deleteTimeMultiple' => 'required|date_format:H:i'
+                'addDateEnd' => 'required|date_format:Y-m-d'
+                //'deleteTimeMultiple' => 'required|date_format:H:i'
             ]);
 
         $startDate = date('Y-m-d', strtotime($request['addDateStart']));
         $endDate = date('Y-m-d', strtotime($request['addDateEnd']));
-        $deleteTime = date('g:i A', strtotime($request['deleteTimeMultiple']));
+        //$deleteTime = date('g:i A', strtotime($request['deleteTimeMultiple']));
 
         //keep track of whether any tours were created
         $tourCount = 0;
 
         //delete all tours between the determined dates
-        Tour::whereBetween('date', [$startDate, $endDate])->where('time', $request['deleteTimeMultiple'])->get()->each(function ($item) use($tourCount)
+        Tour::whereBetween('date', [$startDate, $endDate])->each(function ($item) use($tourCount)
         {
             $item->delete();
         });
 
         //output date range of deleted tours
         //$message = "Deleted $tourCount tours between $startDate and $endDate at $deleteTime.";
-        $message = "Deleted all tours between $startDate and $endDate at $deleteTime.";
+        $message = "Deleted all tours between $startDate and $endDate.";
         $request->session()->flash('deleteMultipleWarning', $message);    
 
         return redirect()->action('TourController@index');
