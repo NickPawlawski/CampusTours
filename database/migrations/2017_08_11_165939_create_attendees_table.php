@@ -23,6 +23,8 @@ class CreateAttendeesTable extends Migration
             $table->integer('studentType');
             $table->text('considerations');
             $table->integer('visitors');
+            $table->integer('attended');
+            $table->integer('startTerm');
 
             $table->integer('tour_id')->unsigned()->nullable();
             

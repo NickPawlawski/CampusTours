@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(TourSeeder::class);
         $this->call(AttendeeSeeder::class);
-        
+        $this->call(TermSeeder::class);
         
         
         

@@ -17,7 +17,8 @@ class AttendeeSeeder extends Seeder
         factory(App\Attendee::class, 10)->create([
             'tour_id' => $faker->randomElement($tours),
             'studentType' => $faker->randomElement($studentTypes),
-            
+            'attended' => 0,
+            'startTerm' => 0
         ]);
     }
 }
