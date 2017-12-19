@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/','HomeController@store')->name('home.store');
 
-Route::get('login','HomeController@admin')->name('login');
+Route::get('login','LoginController@login')->name('login');
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
