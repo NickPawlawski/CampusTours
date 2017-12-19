@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $majors = Major::all();
-        $tours = Tour::where('date','>',date('Y-m-d'))->get();
+        $tours = Tour::where('date','>',date('Y-m-d'))->orderby('date')->get();
 
         $statuses = StudentStatus::all();
         
@@ -67,8 +67,6 @@ class HomeController extends Controller
         $attendee->visitors = $request->get('visitors');
 
         $attendee->save();
-        
-        return "hello";
 
         return redirect(route('home'));
     }

@@ -9,9 +9,16 @@ class Attendee extends Model
 {
     use SoftDeletes;
     
-        protected $dates = [
-            'created_at',
-            'updated_at',
-            'deleted_at'
-        ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    public function tour()
+    {   
+        return $this->belongsTo('App\Tour');
+    }
+
+
 }

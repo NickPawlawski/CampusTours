@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
 <ul class="breadcrumbs">
-    <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
-    <li class="current"><a href="{{ action('AttendeesController@index') }}">Attendees</a></li>
+	<li class="current"><a href="{{ action('HomeController@admin') }}">Admin</a></li>
 </ul>
 
+  
 <div class="row">
-  <div class="small-12 medium-6 column">
-    <legend> Majors Admin</legend>
+    <div class="small-12 medium-6 column">
+      <!-- Report Filter Form -->
+      <legend> Report Of Attendees</legend>
       <table border = "1" id="majors_table">
       <thead>
           <th width="150">
@@ -50,12 +50,7 @@
 
 
     </table>
-
-    <form method = "get" action = "{{route('student.status')}}">
-            <input class = "button" type = "submit" value = "View Student Statuses">
-    </form>
-  </div>
+    </div>
 </div>
 
-
-@endsection
+@endsection()

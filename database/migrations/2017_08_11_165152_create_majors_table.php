@@ -15,14 +15,13 @@ class CreateMajorsTable extends Migration
     {
         Schema::create('majors', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-
-            $table->softDeletes();
             $table->string('name');
             $table->string('code');
             $table->boolean('undergraduate')->default(false);
             $table->boolean('graduate')->default(false);
             $table->boolean('active')->default(true);
+            $table->timestamps();
+            $table->softDeletes();
 
         });
     }
