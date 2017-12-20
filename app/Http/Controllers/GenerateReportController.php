@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tour;
 use App\Attendee;
+use App\Major;
+use App\Term;
+use App\StudentStatus;
 use Carbon\Carbon;
 
 class GenerateReportController extends Controller
@@ -32,7 +35,11 @@ class GenerateReportController extends Controller
             $query->whereBetween('date',[$startDate, $endDate]);
         }])->get();
         $attendees = Attendee::with('tour')->get();
+
+        $majors = Major::get();
+        $terms = Term::get();
+        $studentTypes = StudentStatus::get();
         //dd($attendees);
-        return view('admin.report.show_report')->with(['attendees'=>$attendees]);
+        return view('admin.report.show_report')->with(['attendees'=>$attendees,'majors'=>$majors,'terms'=>$terms,'studentTypes'=>$studentTypes]);
     }
 }
