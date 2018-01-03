@@ -22,7 +22,10 @@ class AttendeeSeeder extends Seeder
                 'studentType' => $faker->randomElement($studentTypes),
                 'attended' => 0,
                 'startTerm' => 0,
-                'major' => $faker->randomElement($majors)
+                'major' => $faker->randomElement($majors),
+                'visited' => 0,
+                'viewable' => 0
+                
             ]);
         }
         

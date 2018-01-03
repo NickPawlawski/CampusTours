@@ -27,6 +27,10 @@ class CreateAttendeesTable extends Migration
             $table->integer('startTerm');
             $table->integer('major');
 
+            $table->boolean('visited');
+            $table->boolean('viewable');
+            $table->string('token',16)->unique();
+
             $table->integer('tour_id')->unsigned()->nullable();
             
             $table->timestamps();

@@ -50,6 +50,8 @@ $factory->define(App\Attendee::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'visitors'=> $faker->randomDigit,
         'phone' => $faker->tollFreePhoneNumber,
-        'considerations' => $faker->text
+        'considerations' => $faker->text,
+        'token' => str_random(16)
+    
     ];
 });
