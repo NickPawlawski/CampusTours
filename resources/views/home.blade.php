@@ -18,6 +18,7 @@
               </span>
             @endif
           </label>
+          
           <label for="lastName">Last Name
             <input type="text" id="lastName" name="lastName" />
             @if($errors->has('lastName'))

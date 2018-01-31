@@ -18,6 +18,9 @@ Route::get('login','LoginController@login')->name('login');
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::get('/attendee_information/{id}','AttendeeInformationController@index')->name('attendee.index');
+Route::post('/attendee_information/{id}','AttendeeInformationController@update')->name('attendee.update');
+
 Route::group([
     'middleware' => ['auth'],
     'prefix' => 'admin'

@@ -7,6 +7,7 @@ use App\Attendee;
 use App\Major;
 use App\Term;
 use App\StudentStatus;
+use App\Tour;
 
 class AttendeesController extends Controller
 {
@@ -17,7 +18,9 @@ class AttendeesController extends Controller
     ->paginate(15)
     ->all();
     
-    return view('admin.attendees',['attendees' => $attendees]);
+    $studentTypes = StudentStatus::get();
+
+    return view('admin.attendees',['attendees' => $attendees,'studentTypes'=>$studentTypes]);
   }
 
   public function show(Request $request, $id)
@@ -27,8 +30,15 @@ class AttendeesController extends Controller
     $majors = Major::get();
     $terms = Term::get();
     $studentTypes = StudentStatus::get();
-      
-    return view('admin.attendee_show')->with(['attendee'=>$attendee,'majors'=>$majors,'terms'=>$terms,'studentTypes'=>$studentTypes]);
+    
+    $tour = Tour::find($attendee->tour_id);
+
+    return view('admin.attendee_show')->
+      with(['attendee'=>$attendee,
+            'majors'=>$majors,
+            'terms'=>$terms,
+            'studentTypes'=>$studentTypes,
+            'tour'=>$tour]);
   }
 
   public function update(Request $request, $id)

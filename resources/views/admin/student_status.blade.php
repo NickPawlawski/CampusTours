@@ -22,12 +22,27 @@
             {{ csrf_field() }}
 		    {{ method_field('PUT') }}
 
+        @if($student_status->name == "N/A")
+        <tr>
+            <td>
+                {{ "Deleted Status"}}
+            </td>
+            <td>
+                {{ $student_status->old_name }}
+            </td>
+            <td>
+                <input class = "button" type = "submit" value = "Restore Status">
+            </td>
+        </tr>
+        @else
+
             <tr>
                 <td>
-                    {{ $student_status->name }}
+                {{ $student_status->name }}
+                    
                 </td>
                 <td>
-                    <input type = "text" name = "name" value = "" >
+                    <input type = "text" name = "name" value = "">
                     @if ($errors->first('name'))
                         <small class="error">{{ $errors->first('name') }}</small>
                     @endif
@@ -36,6 +51,7 @@
                     <input class = "button" type = "submit" value = "Save Status">
                 </td>
         </form>
+        
 
         <form method = "POST" action = "{{route('student.status.delete',$student_status->id)}}">
             {{ csrf_field() }}
@@ -45,7 +61,7 @@
             </td>
             </tr>
         </form>
-
+        @endif
         @endforeach
 
         <form method = "POST" action = "{{route('student.status.create')}}">
@@ -54,8 +70,8 @@
             <td>
                 <input type = "text" name = "name" value = "" >
                 @if ($errors->first('name'))
-              <small class="error">{{ $errors->first('name') }}</small>
-              @endif
+                    <small class="error">{{ $errors->first('name') }}</small>
+                @endif
             </td>
             <td>
               <input class = "button" type = "submit" value = "Create New Status">

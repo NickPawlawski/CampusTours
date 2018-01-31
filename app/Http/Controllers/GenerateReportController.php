@@ -40,6 +40,11 @@ class GenerateReportController extends Controller
         $terms = Term::get();
         $studentTypes = StudentStatus::get();
         //dd($attendees);
-        return view('admin.report.show_report')->with(['attendees'=>$attendees,'majors'=>$majors,'terms'=>$terms,'studentTypes'=>$studentTypes]);
+        return view('admin.report.show_report')->with([
+            'attendees'=>$attendees,
+            'majors'=>$majors,
+            'terms'=>$terms,
+            'studentTypes'=>$studentTypes
+        ]);
     }
 }

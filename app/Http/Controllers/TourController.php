@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tour;
+use App\Attendee;
+use App\Major;
+use App\Term;
+use App\StudentStatus;
 use Carbon\Carbon;
 
 class TourController extends Controller
@@ -161,9 +165,18 @@ class TourController extends Controller
     public function show(Request $request, $id)
     {
         $tour = Tour::find($id);
+        $attendees = Attendee::where('tour_id', $id)->get();
+        $majors = Major::get();
+        $terms = Term::get();
+        $studentTypes = StudentStatus::get();
+        //dd($attendees);
 
         return view('admin.tours.show', [
-            'tour' => $tour
+            'tour' => $tour,
+            'attendees'=>$attendees,
+            'majors' => $majors,
+            'terms' => $terms,
+            'studentTypes' => $studentTypes
         ]);   
     }
 

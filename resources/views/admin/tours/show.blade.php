@@ -9,8 +9,42 @@
 <div class="row">
 	<div class="small-12 columns">
 		<h1>Tour {{ $tour->id }}</h1>
-		<h3>Time</h3>
-		<p>{{ date('m/d/Y h:i A', strtotime($tour->date . ' ' . $tour->time))}}</p>
+		<h3>
+      {{ date('m/d/Y', strtotime($tour->date))}}
+      {{ date('h:i A', strtotime($tour->time))}}
+    </h3>
+  
+		<table border = "1" id="majors_table">
+      <thead>
+        <th width="150">First Name</th>
+        <th width="150">Last Name</th>
+        <th width="150">Email</th>
+        <th width="150">Phone Number</th>
+        <th width="150">Type</th>
+        <th width="150">Visitors</th>
+      </thead>
+      @foreach ($attendees as $attendee)
+        <tr>
+          <td>{{ $attendee->firstName }}</td>
+          <td>{{ $attendee->lastName }}</td>	
+          <td>{{ $attendee->email }}</td>
+          <td>{{ $attendee->phone }}</td>	
+          <td>{{ $studentTypes[$attendee->studentType-1]->name }}</td>
+          <td>{{ $attendee->visitors }}</td>	
+
+          <td>
+            <form method = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
+              <input class = "button" type = "submit" value = "View Attendee">
+            </form>
+          </td>
+		  <td>
+			<form method = "get" action = "{{ action('AttendeeInformationController@index',['id'=>$attendee->token]) }}">
+				<input class = "button" type = "submit" value = "Attendee Arrival">
+			</form>
+		  </td>
+        </tr>
+      @endforeach
+	  </table>
 	</div>
 </div>
 

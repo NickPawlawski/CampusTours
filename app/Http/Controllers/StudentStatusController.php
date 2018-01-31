@@ -22,12 +22,22 @@ class StudentStatusController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required'
+            
         ]);
 
         
         $studentStatus = StudentStatus::find($id);
-        $studentStatus->name = $request->get('name');
+        
+
+        if($studentStatus->name == "N/A")
+        {
+            $studentStatus->name = $studentStatus->old_name;
+            $studentStatus->old_name = "";
+        }
+        else
+        {
+            $studentStatus->name = $request->get('name');
+        }
 
         $studentStatus->save();
 
@@ -39,7 +49,10 @@ class StudentStatusController extends Controller
     {
         $studentStatus = StudentStatus::find($id);
 
-        $studentStatus->delete();
+        $studentStatus->old_name = $studentStatus->name;
+        $studentStatus->name = "N/A";
+
+        $studentStatus->save();
 
         return redirect(route('student.status'));
     }

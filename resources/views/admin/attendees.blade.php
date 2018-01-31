@@ -12,32 +12,20 @@
     <legend> Majors Admin</legend>
       <table border = "1" id="majors_table">
       <thead>
-          <th width="150">
-            First Name
-          </th>
-          <th width="150">
-            Last Name
-          </th>
-          <th width="150">
-            Email
-          </th>
-          <th width="150">
-            Phone Number
-          </th>
-          <th width="150">
-            Type
-          </th>
-          <th width="150">
-            Visitors
-          </th>
-        </thead>
-        @foreach ($attendees as $attendee)
+        <th width="150">First Name</th>
+        <th width="150">Last Name</th>
+        <th width="150">Email</th>
+        <th width="150">Phone Number</th>
+        <th width="150">Type</th>
+        <th width="150">Visitors</th>
+      </thead>
+      @foreach ($attendees as $attendee)
         <tr>
           <td>{{ $attendee->firstName }}</td>
           <td>{{ $attendee->lastName }}</td>	
           <td>{{ $attendee->email }}</td>
           <td>{{ $attendee->phone }}</td>	
-          <td>{{ $attendee->studentType }}</td>
+          <td>{{ $studentTypes[$attendee->studentType-1]->name }}</td>
           <td>{{ $attendee->visitors }}</td>	
 
           <td>
@@ -46,7 +34,7 @@
               </form>
           </td>
         </tr>
-        @endforeach
+      @endforeach
 
 
     </table>

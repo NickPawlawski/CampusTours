@@ -13,8 +13,7 @@
 	<div class="small-12 columns">
 		<h1>User {{$user->name}}</h1>
 
-		<form method = "POST" action = "{{
-		action('UserController@update', ['id' => $user->id]) }}">
+		<form method = "POST" action = "{{action('UserController@update', ['id' => $user->id]) }}">
 		{{ csrf_field() }}
 		{{ method_field('PUT') }}
 
@@ -26,13 +25,12 @@
 			<tbody>
 				<tr>
 					<td>
-						<label for="User Name" class="{{ $errors->
-							first('name') ? 'error' : '' }}">User Name</label>
+						<label for="User Name" class="{{ $errors->first('name') ? 'error' : '' }}">User Name</label>
 					</td>
 					<td>
 						<input type="text" name="name" value="{{ old('name') ? old('name') : $user->name }}">
 						@if ($errors->first('name'))
-						<small class="error">{{ $errors->first('name') }}</small>
+							<small class="error">{{ $errors->first('name') }}</small>
 						@endif
 					</td>
 				</tr>
@@ -44,7 +42,7 @@
 					<td>
 						<input type="text" name="email" value="{{ old('email') ? old('email') : $user->email }}">
 						@if ($errors->first('email'))
-						<small class="error">{{ $errors->first('email') }}</small>
+							<small class="error">{{ $errors->first('email') }}</small>
 						@endif
 					</td>
 				</tr>
@@ -56,7 +54,7 @@
 					<td>
 						<input type = "password" name = "password">
 						@if ($errors->first('password'))
-						<small class="error">{{ $errors->first('password') }}</small>
+							<small class="error">{{ $errors->first('password') }}</small>
 						@endif
 					</td>
 				</tr>
@@ -69,17 +67,14 @@
 					<td>
 						<input type="password" name="password_confirmation">
 						@if ($errors->first('password_confirmation'))
-						<small class="error">{{ $errors->first('password_confirmation') }}</small>
+							<small class="error">{{ $errors->first('password_confirmation') }}</small>
 						@endif
 					</td>
 				</tr>
-
 			</tbody>
 		</table> 
-
 		<input class="button" type="submit" value="Update User">
 	</form>
-
 	</div>
 </div>
 

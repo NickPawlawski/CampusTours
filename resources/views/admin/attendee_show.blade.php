@@ -30,6 +30,19 @@
 			</tr>
 		</table>
 
+		<table border = "1" id = "date_table">
+			<thead>
+				<th>Tour Date</th>
+				<th>Tour Time</th>
+			</thead>
+
+			<tr>
+				<td>{{ date('m/d/Y', strtotime($tour->date))}}</td>
+      			<td>{{ date('h:i A', strtotime($tour->time))}}</td>
+			</tr>
+		</table>
+
+
 		<table border = "1" id = "edit_table">
 			<thead>
 				<th>Information Type</th>
@@ -71,18 +84,34 @@
 			</tr>
 
 			<tr>
-				<td>Email</td>
-				<td>{{ $attendee->email }}</td>
+				<td>Type</td>
+				<td>{{  $studentTypes[$attendee->studentType-1]->name }}</td>
 				<td>
-					<input type = "text" name = "email" value = "">
-                    @if ($errors->first('email'))
-                        <small class="error">{{ $errors->first('email') }}</small>
-                    @endif 
+				<select name = "status" id = "hall" value = "">
+					<option value = "">No Change</option>
+                	@foreach($studentTypes as $sTypes)
+                  		<option value = "{{$sTypes->id}}">{{$sTypes->name}}</option>
+                	@endforeach
+            	</select>
+           		@if($errors->has('status'))
+              		<span class = "error" >
+                		<strong>{{$errors->first('status')}}</strong>
+              		</span>
+           		@endif
 				</td>
 			</tr>
 
+			<tr>
+				<td>Visitors</td>
+				<td>{{ $attendee->visitors }}</td>
+				<td>
+					<input type = "text" name = "Visitors" value = "">
+                    @if ($errors->first('Visitors'))
+                        <small class="error">{{ $errors->first('Visitors') }}</small>
+                    @endif 
+				</td>
+			</tr>
 		</table>
-
 		<input class = "button" type = "submit" value = "Update Information">
 	</form>
 </div>
