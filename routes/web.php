@@ -19,6 +19,7 @@ Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/attendee_information/{id}','AttendeeInformationController@index')->name('attendee.index');
+Route::get('/attendee_information/{id}/type','AttendeeInformationController@get_type')->name('attendee.get_type');
 Route::post('/attendee_information/{id}','AttendeeInformationController@update')->name('attendee.update');
 
 Route::group([

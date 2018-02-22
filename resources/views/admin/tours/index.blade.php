@@ -120,16 +120,16 @@
           </div>
         @endif
         {{ csrf_field() }}
-        <label for="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}">Start Date
-          <input type="date" id="addDateStart" name="addDateStart" class="{{ $errors->first('addDateStart') ? 'error' : '' }}" value="{{ old('addDateStart') }}"/>
-          @if ($errors->first('addDateStart'))
-            <small class="error">{{ $errors->first('addDateEnd') }}</small>
+        <label for="deleteDateStart" class="{{ $errors->first('deleteDateStart') ? 'error' : '' }}">Start Date
+          <input type="date" id="deleteDateStart" name="deleteDateStart" class="{{ $errors->first('deleteDateStart') ? 'error' : '' }}" value="{{ old('addDateStart') }}"/>
+          @if ($errors->first('deleteDateStart'))
+            <small class="error">{{ $errors->first('deleteDateStart') }}</small>
           @endif
         </label>
-        <label for="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}">End Date
-          <input type = "date" id="addDateEnd" name="addDateEnd" class="{{ $errors->first('addDateEnd') ? 'error' : '' }}" value="{{ old('addDateEnd') }}" />
-          @if ($errors->first('addDateEnd'))
-            <small class="error">{{ $errors->first('addDateEnd') }}</small>
+        <label for="deleteDateEnd" class="{{ $errors->first('deleteDateEnd') ? 'error' : '' }}">End Date
+          <input type = "date" id="deleteDateEnd" name="deleteDateEnd" class="{{ $errors->first('deleteDateEnd') ? 'error' : '' }}" value="{{ old('addDateEnd') }}" />
+          @if ($errors->first('deleteDateEnd'))
+            <small class="error">{{ $errors->first('deleteDateEnd') }}</small>
           @endif
         </label>
         <input class="button" type="submit" value="Delete Tours">

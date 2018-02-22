@@ -44,14 +44,15 @@ class AttendeesController extends Controller
   public function update(Request $request, $id)
   {
     $this->validate($request, [
-      'name' => 'required'
+      'Visitors' => 'min:0|max:100'
+
     ]);
   
     $attendee = Attendee::find($id);
 
-    $attendee->name = $request->get('name');
+    $attendee->name = $request->get('firstName');
 
-    $major->save();
+    $attendee->save();
 
     return redirect()->action('attendee_show@index');
   }

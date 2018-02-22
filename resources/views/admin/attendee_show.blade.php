@@ -10,6 +10,8 @@
 <div>
   <h1>Attendee: {{ $attendee->firstName }} {{$attendee->lastName}}</h1>
 	<form method = "POST" action = "{{ action('AttendeesController@update', ['id' => $attendee->id]) }}">
+		{{ csrf_field() }}
+		{{ method_field('PUT') }}
 		<table border = "1" id="majors_table">
 			<thead>
 				<th>First Name</th>
@@ -54,7 +56,7 @@
 				<td>First Name</td>
 				<td>{{ $attendee->firstName }}</td>
 				<td>
-					<input type = "text" name = "firstName" value = "">
+					<input type = "text" name = "firstName" value = "{{$attendee->firstName}}">
                     @if ($errors->first('firstName'))
                         <small class="error">{{ $errors->first('firstName') }}</small>
                     @endif
@@ -65,7 +67,7 @@
 				<td>Last Name</td>
 				<td>{{ $attendee->lastName }}</td>
 				<td>
-					<input type = "text" name = "lastName" value = "">
+					<input type = "text" name = "lastName" value = "{{ $attendee->lastName }}">
                     @if ($errors->first('lastName'))
                         <small class="error">{{ $errors->first('lastName') }}</small>
                     @endif 
@@ -76,36 +78,20 @@
 				<td>Email</td>
 				<td>{{ $attendee->email }}</td>
 				<td>
-					<input type = "text" name = "email" value = "">
+					<input type = "text" name = "email" value = "{{ $attendee->email }}">
                     @if ($errors->first('email'))
                         <small class="error">{{ $errors->first('email') }}</small>
                     @endif 
 				</td>
 			</tr>
 
-			<tr>
-				<td>Type</td>
-				<td>{{  $studentTypes[$attendee->studentType-1]->name }}</td>
-				<td>
-				<select name = "status" id = "hall" value = "">
-					<option value = "">No Change</option>
-                	@foreach($studentTypes as $sTypes)
-                  		<option value = "{{$sTypes->id}}">{{$sTypes->name}}</option>
-                	@endforeach
-            	</select>
-           		@if($errors->has('status'))
-              		<span class = "error" >
-                		<strong>{{$errors->first('status')}}</strong>
-              		</span>
-           		@endif
-				</td>
-			</tr>
+			
 
 			<tr>
 				<td>Visitors</td>
 				<td>{{ $attendee->visitors }}</td>
 				<td>
-					<input type = "text" name = "Visitors" value = "">
+					<input type = "text" name = "Visitors" value = "{{ $attendee->visitors }}">
                     @if ($errors->first('Visitors'))
                         <small class="error">{{ $errors->first('Visitors') }}</small>
                     @endif 

@@ -20,12 +20,29 @@ class CreateAttendeesTable extends Migration
             $table->string('lastName');
             $table->string('email');
             $table->string('phone');
-            $table->integer('studentType');
-            $table->text('considerations');
+            $table->integer('studentType')->nullable();
+            $table->text('considerations')->nullable();
             $table->integer('visitors');
             $table->integer('attended');
-            $table->integer('startTerm');
+            $table->integer('startTerm')->nullable();
             $table->integer('major');
+
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+
+            $table->string('highschoolname')->nullable();
+            $table->string('highschoolcity')->nullable();
+            $table->string('highschoolgpa')->nullable();
+            $table->string('highschoolact')->nullable();
+            $table->string('highschoolgrade')->nullable();
+            $table->string('highschoolearlycollege')->nullable();
+
+            $table->string('collegename')->nullable();
+            $table->string('collegecity')->nullable();
+            $table->string('collegegpa')->nullable();
+            
 
             $table->boolean('visited');
             $table->boolean('viewable');

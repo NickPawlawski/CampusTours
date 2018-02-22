@@ -49,7 +49,6 @@ class HomeController extends Controller
             'lastName' => 'required',
             'email' => 'required|email|confirm',
             'phone' => 'required',
-            'status' => 'required',
             'visitors' => 'required|min:1|max:420',
             'major' => 'required'
         ]);
@@ -62,7 +61,6 @@ class HomeController extends Controller
         $attendee->lastName = $request->get('lastName');
         $attendee->email = $request->get('email');
         $attendee->phone = $request->get('phone');
-        $attendee->studentType = $request->get('status');
         $attendee->considerations = $request->get('considerations');
         $attendee->visitors = $request->get('visitors');
 

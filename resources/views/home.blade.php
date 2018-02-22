@@ -49,19 +49,6 @@
               </span>
             @endif
           </label>
-
-          <label for="status">Type
-            <select name = "status" id = "hall" value = "other">
-                @foreach($statuses as $status)
-                  <option value = "{{$status->id}}">{{$status->name}}</option>
-                @endforeach
-            </select>
-            @if($errors->has('status'))
-              <span class = "error" >
-                <strong>{{$errors->first('status')}}</strong>
-              </span>
-            @endif
-          </label>
           
           <label for="visitors">Number of Visitors
             <input type="text" id="visitors" name="visitors" />

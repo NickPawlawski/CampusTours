@@ -83,13 +83,13 @@ class TourController extends Controller
     {
         //validate the dates and time
         $this->validate($request, [
-                'addDateStart' => 'required|date_format:Y-m-d',
-                'addDateEnd' => 'required|date_format:Y-m-d'
+                'deleteDateStart' => 'required|date_format:Y-m-d',
+                'deleteDateEnd' => 'required|date_format:Y-m-d'
                 //'deleteTimeMultiple' => 'required|date_format:H:i'
             ]);
 
-        $startDate = date('Y-m-d', strtotime($request['addDateStart']));
-        $endDate = date('Y-m-d', strtotime($request['addDateEnd']));
+        $startDate = date('Y-m-d', strtotime($request['deleteDateStart']));
+        $endDate = date('Y-m-d', strtotime($request['deleteDateEnd']));
         //$deleteTime = date('g:i A', strtotime($request['deleteTimeMultiple']));
 
         //keep track of whether any tours were created

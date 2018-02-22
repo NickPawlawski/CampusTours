@@ -38,7 +38,7 @@
             </form>
           </td>
 		  <td>
-			<form method = "get" action = "{{ action('AttendeeInformationController@index',['id'=>$attendee->token]) }}">
+			<form method = "get" action = "{{ action('AttendeeInformationController@get_type',['id'=>$attendee->token]) }}">
 				<input class = "button" type = "submit" value = "Attendee Arrival">
 			</form>
 		  </td>

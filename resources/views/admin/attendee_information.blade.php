@@ -150,12 +150,12 @@
             @endif
 		</label>
 
-		<label for = "currentGpa">
+		<label for = "collegeGpa">
 			<p>Current GPA</p>
-				<input type = "text" id = "currentGpa" name = "currentGpa" value = "{{Request::old('currentGpa')}}">
-			@if($errors->has('currentGpa'))
+				<input type = "text" id = "collegeGpa" name = "collegeGpa" value = "{{Request::old('collegeGpa')}}">
+			@if($errors->has('collegeGpa'))
             <span class = "error" >
-            	<strong>{{$errors->first('currentGpa')}}</strong>
+            	<strong>{{$errors->first('collegeGpa')}}</strong>
             </span>
             @endif
 		</label>
