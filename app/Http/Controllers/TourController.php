@@ -9,6 +9,7 @@ use App\Major;
 use App\Term;
 use App\StudentStatus;
 use Carbon\Carbon;
+use Mail;   
 
 class TourController extends Controller
 {
@@ -16,6 +17,7 @@ class TourController extends Controller
        forms for adding and filtering them. */
     public function index(Request $request) {
         // Validate the start and end date inputs.
+        
         $this->validate($request, [
                 'filterDateStart' => 'date_or_empty',
                 'filterDateEnd' => 'date_or_empty',
@@ -206,5 +208,33 @@ class TourController extends Controller
         $tour->restore();
 
         return redirect()->back();
+    }
+
+    public function sendEmail(Request $request,$id,$tourID)
+    {
+        $attendee = Attendee::where('token',$id)->firstorfail();
+
+        $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
+
+        Mail::send('emails.reminder', ['user' => $attendee], function ($m) use ($attendee) {
+            $m->from('ngf9321@wmich.edu', 'Nick');
+        
+            $m->to('ngf9321@wmich.edu');
+        });
+
+        $tour = Tour::find($tourID);
+        $attendees = Attendee::where('tour_id', $tourID)->get();
+        $majors = Major::get();
+        $terms = Term::get();
+        $studentTypes = StudentStatus::get();
+            
+
+        return view('admin.tours.show', [
+            'tour' => $tour,
+            'attendees'=>$attendees,
+            'majors' => $majors,
+            'terms' => $terms,
+            'studentTypes' => $studentTypes
+        ]);   
     }
 }

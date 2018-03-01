@@ -44,10 +44,11 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
+        
         $errors = $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email|confirm',
+            'email' => 'required',
             'phone' => 'required',
             'visitors' => 'required|min:1|max:420',
             'major' => 'required'
@@ -63,9 +64,26 @@ class HomeController extends Controller
         $attendee->phone = $request->get('phone');
         $attendee->considerations = $request->get('considerations');
         $attendee->visitors = $request->get('visitors');
+        $attendee->major = $request->get('major');
+
+        $attendee->attended = 0;
+        $attendee->visited = 0;
+        $attendee->viewable = 0;
+        $attendee->token = str_random(16);
 
         $attendee->save();
+        
 
-        return redirect(route('home'));
+        return view('attendee.month',['attendee' => $attendee]);
+    }
+
+    public function monthSelction(Request $request,$id)
+    {
+        return view(route('monthSelection'));
+    }
+
+    public function tourSelection(Request $request,$id)
+    {
+        return "success";
     }
 }

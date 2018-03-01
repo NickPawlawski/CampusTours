@@ -60,7 +60,7 @@
           </label>
         
           <label for="major">Major
-            <select name = "major" id = "hall"  value = "other">
+            <select name = "major" id = "major"  value = "other">
               @foreach($majors as $major)
                 <option value = "{{$major->id}}">{{$major->name}}</option>
               @endforeach
@@ -82,22 +82,7 @@
             @endif
         </fieldset>
 
-        <fieldset>
-        <label for="tourDates">Select a Tour </label>
-          <input list="tourDates">
-            <datalist id="tourDates">
-              @foreach($tours as $tour)
-                <option >{{date('l, M d Y', strtotime($tour->date))}}</option>
-              @endforeach 
-            </datalist>
-              @if($errors->has('tours'))
-                <span class = "error" >
-                  <strong>{{$errors->first('tours')}}</strong>
-                </span>
-              @endif
-            </select>
-
-        </fieldset>         
+              
 
         <input class = "button" type = "submit" value = "Submit Form">
     </form>

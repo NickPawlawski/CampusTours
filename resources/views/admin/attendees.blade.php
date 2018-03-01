@@ -25,7 +25,11 @@
           <td>{{ $attendee->lastName }}</td>	
           <td>{{ $attendee->email }}</td>
           <td>{{ $attendee->phone }}</td>	
+          @if($attendee->studentType != null)
           <td>{{ $studentTypes[$attendee->studentType-1]->name }}</td>
+          @else
+          <td>{{ "Unknown" }}</td>
+          @endif
           <td>{{ $attendee->visitors }}</td>	
 
           <td>

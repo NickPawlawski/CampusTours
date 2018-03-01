@@ -18,8 +18,8 @@
 				<th>Last Name</th>
 				<th>Email</th>
 				<th>Phone Number</th>
-				<th>Type</th>
 				<th>Visitors</th>
+				<th>Type</th>
 			</thead>
 			
 			<tr>
@@ -27,8 +27,12 @@
 				<td>{{ $attendee->lastName }}</td>	
 				<td>{{ $attendee->email }}</td>
 				<td>{{ $attendee->phone }}</td>	
-				<td>{{ $studentTypes[$attendee->studentType-1]->name }}</td>
 				<td>{{ $attendee->visitors }}</td>	
+				@if($attendee->studentType != null)
+				<td>{{ $studentTypes[$attendee->studentType-1]->name }}</td>
+				@else
+				<td>{{ "Unknown" }}</td>
+				@endif
 			</tr>
 		</table>
 
@@ -36,11 +40,13 @@
 			<thead>
 				<th>Tour Date</th>
 				<th>Tour Time</th>
+				<th>Tour ID</th>
 			</thead>
 
 			<tr>
 				<td>{{ date('m/d/Y', strtotime($tour->date))}}</td>
       			<td>{{ date('h:i A', strtotime($tour->time))}}</td>
+				<td>{{ $tour->id }}</td>
 			</tr>
 		</table>
 

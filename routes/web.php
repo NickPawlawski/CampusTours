@@ -12,6 +12,10 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/month', 'HomeController@monthSelection')->name('monthSelection');
+
+Route::get('/month/tour', 'HomeController@tourSelection')->name('getTourSelection');
+Route::post('/month/tour', 'HomeController@tourSelection')->name('submit.tour');
 Route::post('/','HomeController@store')->name('home.store');
 
 Route::get('login','LoginController@login')->name('login');
@@ -20,6 +24,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/attendee_information/{id}','AttendeeInformationController@index')->name('attendee.index');
 Route::get('/attendee_information/{id}/type','AttendeeInformationController@get_type')->name('attendee.get_type');
+
 Route::post('/attendee_information/{id}','AttendeeInformationController@update')->name('attendee.update');
 
 Route::group([
@@ -35,7 +40,7 @@ Route::group([
     Route::group([
         'prefix' => 'tours'
     ], function() {
-        Route::get('/', 'TourController@index');
+        Route::get('/', 'TourController@index')->name('tour');
         Route::post('/','TourController@store');
         Route::post('/multiple', 'TourController@storeMultiple');
         Route::delete('/deleteMult', 'TourController@deleteMultiple');
@@ -44,6 +49,8 @@ Route::group([
         Route::get('/deleted', 'TourController@deleted');
         Route::get('/{id}', 'TourController@show');
         Route::post('/{id}/restore', 'TourController@restore');
+
+        Route::get('/email/{id}/{tourId}','TourController@sendEmail')->name('email');
     });
 
     Route::resource('majors','MajorsController');

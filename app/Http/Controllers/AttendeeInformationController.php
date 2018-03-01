@@ -93,8 +93,17 @@ class AttendeeInformationController extends Controller
         ]);
     }
 
+    
+
     public function get_type(Request $request,$id)
     {
+
+        $attendee = Attendee::where('token',$id)->firstorfail();
+
+        $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
+
+        dd($email);
+
         $attendee = Attendee::where('token',$id)->firstorfail();
         $majors = Major::get();
         $terms = Term::get();

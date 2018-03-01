@@ -15,7 +15,7 @@ class AttendeesController extends Controller
   public function index(Request $request)
   {
     $attendees = Attendee::orderBy('firstName', 'desc')
-    ->paginate(15)
+    ->paginate(5)
     ->all();
     
     $studentTypes = StudentStatus::get();

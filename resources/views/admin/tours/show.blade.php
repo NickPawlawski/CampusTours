@@ -4,7 +4,7 @@
 <ul class="breadcrumbs">
 	<li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
 	<li><a href="{{ action('TourController@index') }}">Tours</a></li>
-	<li class="current"><a href="{{ action('TourController@show', ['id' => $tour->id]) }}">Show Tour</a></li>
+	<li class="current"><a href="">Show Tour</a></li>
 </ul>
 <div class="row">
 	<div class="small-12 columns">
@@ -20,7 +20,6 @@
         <th width="150">Last Name</th>
         <th width="150">Email</th>
         <th width="150">Phone Number</th>
-        <th width="150">Type</th>
         <th width="150">Visitors</th>
       </thead>
       @foreach ($attendees as $attendee)
@@ -29,7 +28,6 @@
           <td>{{ $attendee->lastName }}</td>	
           <td>{{ $attendee->email }}</td>
           <td>{{ $attendee->phone }}</td>	
-          <td>{{ $studentTypes[$attendee->studentType-1]->name }}</td>
           <td>{{ $attendee->visitors }}</td>	
 
           <td>
@@ -38,7 +36,7 @@
             </form>
           </td>
 		  <td>
-			<form method = "get" action = "{{ action('AttendeeInformationController@get_type',['id'=>$attendee->token]) }}">
+			<form method = "get" action = "{{ route('email',['id'=>$attendee->token,'tourID'=>$tour->id]) }}">
 				<input class = "button" type = "submit" value = "Attendee Arrival">
 			</form>
 		  </td>

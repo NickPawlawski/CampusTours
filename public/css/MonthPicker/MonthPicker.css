@@ -1,0 +1,155 @@
+/*
+The jQuery UI Month Picker Version 3.0.4
+https://github.com/KidSysco/jquery-ui-month-picker/
+
+Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see
+<http://www.gnu.org/licenses/gpl-3.0.txt>.
+*/
+
+.month-picker {
+  display: inline-block;
+  position: absolute;
+  z-index: 9999;
+}
+
+.month-picker table {
+  border-collapse: separate;
+  border-spacing: 2px 2px;
+}
+
+.month-picker td {
+  padding: 0px;
+}
+
+/*
+Prevents the button labels from maving sligtly to the left
+when applying the width CSS property to the buttons.
+See: .month-picker-month-table button { width: 4.3em; }
+*/
+
+.month-picker .ui-button-text {
+  padding: .4em 0;
+}
+
+.month-picker-header {
+  margin: 3px 3px 0px 3px;
+}
+
+.month-picker-year-table {
+  width: 100%;
+  /*
+    Makes sure the next/previous/jump years buttons are not unnecessarily
+    selected if the user clicks them a couple of times fast.
+    */
+  -ms-user-select: none;
+  /* IE 10+ */
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/*
+The plugin uses buttons with a transparent background in the year-table
+(aka header) in order to look consistent with jQuery UI datepicker and to
+make the year title a button that blends into the heading in the default state.
+
+The plugin does this by removing the .ui-state-default class from (in MonthPicker.js)
+the a tags (buttons) which also ends up removing the 1px border that it applies.
+
+To prevent the button from resizing and moving everything around when you hover
+in and out, we use a carefully constructed selector, which gets overroden by the
+more specific .ui-state-hover/actove class selectors in the jquery-ui.css
+that apply the visible borders that we want.
+
+This selector applies a 1px transparent border that keeps the button
+in the same size, but it doesen't hide the borders that .ui-state-hover/actove give us.
+*/
+
+.month-picker-year-table a {
+  border: 1px solid transparent;
+}
+
+/*
+Sets the size of the next/previous buttons,
+and makes the buttons in the heading (year-table) sligtly bigger,
+and removes the pointer cursor from the buttons in the heading (year-table).
+*/
+
+.month-picker-year-table .ui-button {
+  font-size: 1.1em;
+  width: 1.5em;
+  height: 1.5em;
+  cursor: default;
+  margin: 0;
+}
+
+.month-picker-year-table .month-picker-title {
+  text-align: center;
+}
+
+.month-picker-year-table .month-picker-title .ui-button {
+  font-size: 1em;
+  padding: .1em 0;
+  width: 100%;
+  font-weight: bold;
+}
+
+/*
+The buttons in the heading (year-table) are slightly shrinked, but because jQuery ui and
+the .month-picker .ui-button-text rule at the top of this CSS file apply some
+padding which results in the button text being moved to the bottom of
+the button.
+
+This rule removes the unnecessary padding so the text in
+the jump years button will be vericaly centred.
+*/
+
+.month-picker-year-table .ui-button-text {
+  padding: 0;
+}
+
+.month-picker-month-table td {
+  height: 35px;
+  text-align: center;
+}
+
+/*
+Makes sure the buttons stay in the same size when swithching
+to the Jump years menu.
+this also ensures that the entire menu dosen't resize itself
+in response to the slightly bigger buttons in the Jump years menu.
+ */
+
+.month-picker-month-table .ui-button {
+  width: 4.2em;
+  margin: .2em;
+}
+
+.month-picker-open-button {
+  height: 20px;
+  width: 20px;
+  vertical-align: bottom;
+}
+
+.month-picker-invalid-message {
+  display: none;
+  background-color: Yellow;
+}
+
+.month-picker-disabled {
+  background-color: #e1e1e1;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJlc291cmNlcy9hc3NldHMvc2Fzcy9Nb250aFBpY2tlci5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qXG5UaGUgalF1ZXJ5IFVJIE1vbnRoIFBpY2tlciBWZXJzaW9uIDMuMC40XG5odHRwczovL2dpdGh1Yi5jb20vS2lkU3lzY28vanF1ZXJ5LXVpLW1vbnRoLXBpY2tlci9cblxuQ29weXJpZ2h0IChDKSAyMDA3IEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwgSW5jLiA8aHR0cDovL2ZzZi5vcmcvPlxuVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU6IHlvdSBjYW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnlcbml0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYXMgcHVibGlzaGVkIGJ5XG50aGUgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLCBlaXRoZXIgdmVyc2lvbiAzIG9mIHRoZSBMaWNlbnNlLCBvclxuKGF0IHlvdXIgb3B0aW9uKSBhbnkgbGF0ZXIgdmVyc2lvbi5cblxuVGhpcyBwcm9ncmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsXG5idXQgV0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1wbGllZCB3YXJyYW50eSBvZlxuTUVSQ0hBTlRBQklMSVRZIG9yIEZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFLiAgU2VlIHRoZVxuR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy5cblxuWW91IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2VcbmFsb25nIHdpdGggdGhpcyBwcm9ncmFtLiAgSWYgbm90LCBzZWVcbjxodHRwOi8vd3d3LmdudS5vcmcvbGljZW5zZXMvZ3BsLTMuMC50eHQ+LlxuKi9cblxuLm1vbnRoLXBpY2tlciB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB6LWluZGV4OiA5OTk5O1xufVxuXG4ubW9udGgtcGlja2VyIHRhYmxlIHtcbiAgYm9yZGVyLWNvbGxhcHNlOiBzZXBhcmF0ZTtcbiAgYm9yZGVyLXNwYWNpbmc6IDJweCAycHg7XG59XG5cbi5tb250aC1waWNrZXIgdGQge1xuICAgIHBhZGRpbmc6IDBweDtcbn1cblxuLypcblByZXZlbnRzIHRoZSBidXR0b24gbGFiZWxzIGZyb20gbWF2aW5nIHNsaWd0bHkgdG8gdGhlIGxlZnRcbndoZW4gYXBwbHlpbmcgdGhlIHdpZHRoIENTUyBwcm9wZXJ0eSB0byB0aGUgYnV0dG9ucy5cblNlZTogLm1vbnRoLXBpY2tlci1tb250aC10YWJsZSBidXR0b24geyB3aWR0aDogNC4zZW07IH1cbiovXG4ubW9udGgtcGlja2VyIC51aS1idXR0b24tdGV4dCB7XG4gIHBhZGRpbmc6IC40ZW0gMDtcbn1cblxuLm1vbnRoLXBpY2tlci1oZWFkZXIge1xuICAgIG1hcmdpbjogM3B4IDNweCAwcHggM3B4O1xufVxuXG4ubW9udGgtcGlja2VyLXllYXItdGFibGUge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIC8qXG4gICAgTWFrZXMgc3VyZSB0aGUgbmV4dC9wcmV2aW91cy9qdW1wIHllYXJzIGJ1dHRvbnMgYXJlIG5vdCB1bm5lY2Vzc2FyaWx5XG4gICAgc2VsZWN0ZWQgaWYgdGhlIHVzZXIgY2xpY2tzIHRoZW0gYSBjb3VwbGUgb2YgdGltZXMgZmFzdC5cbiAgICAqL1xuICAgIC1tcy11c2VyLXNlbGVjdDogbm9uZTsgLyogSUUgMTArICovXG4gICAgLW1vei11c2VyLXNlbGVjdDogLW1vei1ub25lO1xuICAgIC1raHRtbC11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAtd2Via2l0LXVzZXItc2VsZWN0OiBub25lO1xuICAgIHVzZXItc2VsZWN0OiBub25lO1xufVxuXG4vKlxuVGhlIHBsdWdpbiB1c2VzIGJ1dHRvbnMgd2l0aCBhIHRyYW5zcGFyZW50IGJhY2tncm91bmQgaW4gdGhlIHllYXItdGFibGVcbihha2EgaGVhZGVyKSBpbiBvcmRlciB0byBsb29rIGNvbnNpc3RlbnQgd2l0aCBqUXVlcnkgVUkgZGF0ZXBpY2tlciBhbmQgdG9cbm1ha2UgdGhlIHllYXIgdGl0bGUgYSBidXR0b24gdGhhdCBibGVuZHMgaW50byB0aGUgaGVhZGluZyBpbiB0aGUgZGVmYXVsdCBzdGF0ZS5cblxuVGhlIHBsdWdpbiBkb2VzIHRoaXMgYnkgcmVtb3ZpbmcgdGhlIC51aS1zdGF0ZS1kZWZhdWx0IGNsYXNzIGZyb20gKGluIE1vbnRoUGlja2VyLmpzKVxudGhlIGEgdGFncyAoYnV0dG9ucykgd2hpY2ggYWxzbyBlbmRzIHVwIHJlbW92aW5nIHRoZSAxcHggYm9yZGVyIHRoYXQgaXQgYXBwbGllcy5cblxuVG8gcHJldmVudCB0aGUgYnV0dG9uIGZyb20gcmVzaXppbmcgYW5kIG1vdmluZyBldmVyeXRoaW5nIGFyb3VuZCB3aGVuIHlvdSBob3ZlclxuaW4gYW5kIG91dCwgd2UgdXNlIGEgY2FyZWZ1bGx5IGNvbnN0cnVjdGVkIHNlbGVjdG9yLCB3aGljaCBnZXRzIG92ZXJyb2RlbiBieSB0aGVcbm1vcmUgc3BlY2lmaWMgLnVpLXN0YXRlLWhvdmVyL2FjdG92ZSBjbGFzcyBzZWxlY3RvcnMgaW4gdGhlIGpxdWVyeS11aS5jc3NcbnRoYXQgYXBwbHkgdGhlIHZpc2libGUgYm9yZGVycyB0aGF0IHdlIHdhbnQuXG5cblRoaXMgc2VsZWN0b3IgYXBwbGllcyBhIDFweCB0cmFuc3BhcmVudCBib3JkZXIgdGhhdCBrZWVwcyB0aGUgYnV0dG9uXG5pbiB0aGUgc2FtZSBzaXplLCBidXQgaXQgZG9lc2VuJ3QgaGlkZSB0aGUgYm9yZGVycyB0aGF0IC51aS1zdGF0ZS1ob3Zlci9hY3RvdmUgZ2l2ZSB1cy5cbiovXG4ubW9udGgtcGlja2VyLXllYXItdGFibGUgYSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdHJhbnNwYXJlbnQ7XG59XG5cbi8qXG5TZXRzIHRoZSBzaXplIG9mIHRoZSBuZXh0L3ByZXZpb3VzIGJ1dHRvbnMsXG5hbmQgbWFrZXMgdGhlIGJ1dHRvbnMgaW4gdGhlIGhlYWRpbmcgKHllYXItdGFibGUpIHNsaWd0bHkgYmlnZ2VyLFxuYW5kIHJlbW92ZXMgdGhlIHBvaW50ZXIgY3Vyc29yIGZyb20gdGhlIGJ1dHRvbnMgaW4gdGhlIGhlYWRpbmcgKHllYXItdGFibGUpLlxuKi9cbi5tb250aC1waWNrZXIteWVhci10YWJsZSAudWktYnV0dG9uIHtcbiAgICBmb250LXNpemU6IDEuMWVtO1xuICAgIHdpZHRoOiAxLjVlbTtcbiAgICBoZWlnaHQ6IDEuNWVtO1xuICAgIGN1cnNvcjogZGVmYXVsdDtcbiAgICBtYXJnaW46IDA7XG59XG5cbi5tb250aC1waWNrZXIteWVhci10YWJsZSAubW9udGgtcGlja2VyLXRpdGxlIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5tb250aC1waWNrZXIteWVhci10YWJsZSAubW9udGgtcGlja2VyLXRpdGxlIC51aS1idXR0b24ge1xuICAgIGZvbnQtc2l6ZTogMWVtO1xuICAgIHBhZGRpbmc6IC4xZW0gMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuLypcblRoZSBidXR0b25zIGluIHRoZSBoZWFkaW5nICh5ZWFyLXRhYmxlKSBhcmUgc2xpZ2h0bHkgc2hyaW5rZWQsIGJ1dCBiZWNhdXNlIGpRdWVyeSB1aSBhbmRcbnRoZSAubW9udGgtcGlja2VyIC51aS1idXR0b24tdGV4dCBydWxlIGF0IHRoZSB0b3Agb2YgdGhpcyBDU1MgZmlsZSBhcHBseSBzb21lXG5wYWRkaW5nIHdoaWNoIHJlc3VsdHMgaW4gdGhlIGJ1dHRvbiB0ZXh0IGJlaW5nIG1vdmVkIHRvIHRoZSBib3R0b20gb2ZcbnRoZSBidXR0b24uXG5cblRoaXMgcnVsZSByZW1vdmVzIHRoZSB1bm5lY2Vzc2FyeSBwYWRkaW5nIHNvIHRoZSB0ZXh0IGluXG50aGUganVtcCB5ZWFycyBidXR0b24gd2lsbCBiZSB2ZXJpY2FseSBjZW50cmVkLlxuKi9cbi5tb250aC1waWNrZXIteWVhci10YWJsZSAudWktYnV0dG9uLXRleHQge1xuICAgIHBhZGRpbmc6IDA7XG59XG5cbi5tb250aC1waWNrZXItbW9udGgtdGFibGUgdGQge1xuICAgIGhlaWdodDogMzVweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi8qXG5NYWtlcyBzdXJlIHRoZSBidXR0b25zIHN0YXkgaW4gdGhlIHNhbWUgc2l6ZSB3aGVuIHN3aXRoY2hpbmdcbnRvIHRoZSBKdW1wIHllYXJzIG1lbnUuXG50aGlzIGFsc28gZW5zdXJlcyB0aGF0IHRoZSBlbnRpcmUgbWVudSBkb3Nlbid0IHJlc2l6ZSBpdHNlbGZcbmluIHJlc3BvbnNlIHRvIHRoZSBzbGlnaHRseSBiaWdnZXIgYnV0dG9ucyBpbiB0aGUgSnVtcCB5ZWFycyBtZW51LlxuICovXG4ubW9udGgtcGlja2VyLW1vbnRoLXRhYmxlIC51aS1idXR0b24ge1xuICAgIHdpZHRoOiA0LjJlbTtcbiAgICBtYXJnaW46IC4yZW07XG59XG5cbi5tb250aC1waWNrZXItb3Blbi1idXR0b24ge1xuICAgIGhlaWdodDogMjBweDtcbiAgICB3aWR0aDogMjBweDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogYm90dG9tO1xufVxuXG4ubW9udGgtcGlja2VyLWludmFsaWQtbWVzc2FnZSB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBZZWxsb3c7XG59XG5cbi5tb250aC1waWNrZXItZGlzYWJsZWQge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNlMWUxZTE7XG59Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7RUFrQkU7QUFFRixBQUFBLGFBQWEsQ0FBQztFQUNWLE9BQU8sRUFBRSxZQUFZO0VBQ3JCLFFBQVEsRUFBRSxRQUFRO0VBQ2xCLE9BQU8sRUFBRSxJQUFJO0NBQ2hCOztBQUVELEFBQWMsYUFBRCxDQUFDLEtBQUssQ0FBQztFQUNsQixlQUFlLEVBQUUsUUFBUTtFQUN6QixjQUFjLEVBQUUsT0FBTztDQUN4Qjs7QUFFRCxBQUFjLGFBQUQsQ0FBQyxFQUFFLENBQUM7RUFDYixPQUFPLEVBQUUsR0FBRztDQUNmOztBQUVEOzs7O0VBSUU7QUFDRixBQUFjLGFBQUQsQ0FBQyxlQUFlLENBQUM7RUFDNUIsT0FBTyxFQUFFLE1BQU07Q0FDaEI7O0FBRUQsQUFBQSxvQkFBb0IsQ0FBQztFQUNqQixNQUFNLEVBQUUsZUFBZTtDQUMxQjs7QUFFRCxBQUFBLHdCQUF3QixDQUFDO0VBQ3JCLEtBQUssRUFBRSxJQUFJO0VBQ1g7OztNQUdFO0VBQ0YsZUFBZSxFQUFFLElBQUk7RUFBRyxZQUFZO0VBQ3BDLGdCQUFnQixFQUFFLFNBQVM7RUFDM0Isa0JBQWtCLEVBQUUsSUFBSTtFQUN4QixtQkFBbUIsRUFBRSxJQUFJO0VBQ3pCLFdBQVcsRUFBRSxJQUFJO0NBQ3BCOztBQUVEOzs7Ozs7Ozs7Ozs7Ozs7RUFlRTtBQUNGLEFBQXlCLHdCQUFELENBQUMsQ0FBQyxDQUFDO0VBQ3ZCLE1BQU0sRUFBRSxxQkFBcUI7Q0FDaEM7O0FBRUQ7Ozs7RUFJRTtBQUNGLEFBQXlCLHdCQUFELENBQUMsVUFBVSxDQUFDO0VBQ2hDLFNBQVMsRUFBRSxLQUFLO0VBQ2hCLEtBQUssRUFBRSxLQUFLO0VBQ1osTUFBTSxFQUFFLEtBQUs7RUFDYixNQUFNLEVBQUUsT0FBTztFQUNmLE1BQU0sRUFBRSxDQUFDO0NBQ1o7O0FBRUQsQUFBeUIsd0JBQUQsQ0FBQyxtQkFBbUIsQ0FBQztFQUN6QyxVQUFVLEVBQUUsTUFBTTtDQUNyQjs7QUFFRCxBQUE2Qyx3QkFBckIsQ0FBQyxtQkFBbUIsQ0FBQyxVQUFVLENBQUM7RUFDcEQsU0FBUyxFQUFFLEdBQUc7RUFDZCxPQUFPLEVBQUUsTUFBTTtFQUNmLEtBQUssRUFBRSxJQUFJO0VBQ1gsV0FBVyxFQUFFLElBQUk7Q0FDcEI7O0FBRUQ7Ozs7Ozs7O0VBUUU7QUFDRixBQUF5Qix3QkFBRCxDQUFDLGVBQWUsQ0FBQztFQUNyQyxPQUFPLEVBQUUsQ0FBQztDQUNiOztBQUVELEFBQTBCLHlCQUFELENBQUMsRUFBRSxDQUFDO0VBQ3pCLE1BQU0sRUFBRSxJQUFJO0VBQ1osVUFBVSxFQUFFLE1BQU07Q0FDckI7O0FBRUQ7Ozs7O0dBS0c7QUFDSCxBQUEwQix5QkFBRCxDQUFDLFVBQVUsQ0FBQztFQUNqQyxLQUFLLEVBQUUsS0FBSztFQUNaLE1BQU0sRUFBRSxJQUFJO0NBQ2Y7O0FBRUQsQUFBQSx5QkFBeUIsQ0FBQztFQUN0QixNQUFNLEVBQUUsSUFBSTtFQUNaLEtBQUssRUFBRSxJQUFJO0VBQ1gsY0FBYyxFQUFFLE1BQU07Q0FDekI7O0FBRUQsQUFBQSw2QkFBNkIsQ0FBQztFQUMxQixPQUFPLEVBQUUsSUFBSTtFQUNiLGdCQUFnQixFQUFFLE1BQU07Q0FDM0I7O0FBRUQsQUFBQSxzQkFBc0IsQ0FBQztFQUNuQixnQkFBZ0IsRUFBRSxPQUFPO0NBQzVCIn0= */
