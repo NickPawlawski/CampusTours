@@ -24,12 +24,12 @@
         {{ csrf_field() }}
             <h1>Please select the month you would like to Attend</h1>
             <div id="q0">
-              <label for="tourDates">Choose a Month</label>
+              <h2>Please choose a Month</h2>
                 <div>
-                  <input type = "submit" id = "first"  name = "a" value = "1">
-                  <input type = "submit" id = "second" name = "a" value = "2">
-                  <input type = "submit" id = "third"  name = "a" value = "3">
-                  <input type = "hidden" name = "token" value = "{{$attendee->token}}">
+                  <input class = "button" type = "submit" id = "first"  name = "a" value = "1">
+                  <input class = "button" type = "submit" id = "second" name = "a" value = "2">
+                  <input class = "button" type = "submit" id = "third"  name = "a" value = "3">
+                  <input class = "button" type = "hidden" name = "token" value = "{{$attendee->token}}">
                 </div>
               </div>
         </form>

@@ -31,7 +31,7 @@ Route::group([
     'middleware' => ['auth'],
     'prefix' => 'admin'
 ], function() {
-    Route::get('/', 'HomeController@admin');
+    Route::get('/', 'HomeController@admin')->name('admin.login');
     Route::resource('user', 'UserController');
 
     Route::get('reportdate','GenerateReportController@index')->name('report.date');

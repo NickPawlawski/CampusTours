@@ -83,7 +83,7 @@
 
         <input class = "button" type = "submit" value = "Submit Form">
     </form>
-      <form method = "GET" action = "{{ route('login') }}">
+      <form method = "GET" action = "{{ route('admin.login') }}">
         <input class = "button" type = "submit" value = "Admin Login">
       </form>
     </div>

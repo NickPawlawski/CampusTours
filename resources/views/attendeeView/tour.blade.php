@@ -3,7 +3,8 @@
 @section('content')
 <div class="row">
 	<div class="small-12 columns">
-            <h1>Please select the tour you would like to Attend</h1>
+            <h1>Please select the tour you would like to Attend.</h1>
+            <h2>If you would like to change months, use the back button in your browser</h2>
                 <table>
                     <thead>
                         <th>Date</th>
