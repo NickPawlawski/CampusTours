@@ -7,6 +7,7 @@ use App\Major;
 use App\Tour;
 use App\StudentStatus;
 use App\Attendee;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -48,7 +49,7 @@ class HomeController extends Controller
         $errors = $this->validate($request, [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required',
             'visitors' => 'required|min:1|max:420',
             'major' => 'required'
@@ -74,16 +75,54 @@ class HomeController extends Controller
         $attendee->save();
         
 
-        return view('attendee.month',['attendee' => $attendee]);
+        return view('attendeeView.month',['attendee' => $attendee]);
     }
 
     public function monthSelction(Request $request,$id)
     {
-        return view(route('monthSelection'));
+        return view(route('monthSelection')->with(['attendee'=>$attendee]));
     }
 
-    public function tourSelection(Request $request,$id)
+    public function tourSelection(Request $request)
     {
-        return "success";
+        $token = $request->get("token");
+
+        $month = $request->get('a', date('m'));
+        
+        if(date("F")==$month)
+        {
+            $dateStart = date("Y-m-d");
+        }
+        else
+        {
+            $dateStart = Carbon::parse('first day of '.$month.' 2018')->format("Y-m-d");
+        }
+
+
+        
+        $dateEnd = Carbon::parse('last day of '.$month.' 2018')->format("Y-m-d");
+        //dd($dateStart);
+        //dd($dateEnd);
+        
+        $tours = Tour::wherebetween('date',[$dateStart, $dateEnd])->orderBy('date')
+        ->orderBy('time')
+        ->paginate(15);
+
+        return view('attendeeView.tour')->with(['tours'=>$tours,'token'=>$token]);
+    }
+    public function saveTour(Request $request,$id)
+    {
+        $token = $request->get("token");
+
+        $attendee = Attendee::where('token',$token)->first();
+        
+        $attendee->tour_id = $id;
+        
+        $attendee->save();
+        
+        
+        $tour = Tour::find($id);
+
+        return view("attendeeView.success")->with(['attendee'=>$attendee,'tour'=>$tour]);
     }
 }
