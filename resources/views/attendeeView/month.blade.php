@@ -7,7 +7,7 @@
       var d = new Date;
       var i = d.getMonth();
 
-      var months = ["January","Febuary","March","April","May"];
+      var months = ["January","Febuary","March","April","May","June"];
 
 
       document.getElementById("first").value = months[i];
@@ -29,7 +29,7 @@
                   <input class = "button" type = "submit" id = "first"  name = "a" value = "1">
                   <input class = "button" type = "submit" id = "second" name = "a" value = "2">
                   <input class = "button" type = "submit" id = "third"  name = "a" value = "3">
-                  <input class = "button" type = "hidden" name = "token" value = "{{$attendee->token}}">
+                  <input class = "button" type = "hidden" name = "attendee" value = "{{$attendee}}">
                 </div>
               </div>
         </form>

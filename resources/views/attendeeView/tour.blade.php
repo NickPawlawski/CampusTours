@@ -20,7 +20,7 @@
                                 <form method = "POST" action = "{{action('HomeController@saveTour',['id'=>$tour->id])}}">
                                 {{ csrf_field() }}
                                     <input class = "button" type = "submit" value = "Attend This Tour">
-                                    <input type = "hidden" name = "token" value = "{{ $token }}">
+                                    <input type = "hidden" name = "attendee" value = "{{ $attendee }}">
                                 </form>
                             </td>
                         </tr>

@@ -1,7 +1,5 @@
-@extends('layouts.app')
 
-@section('content')
+Thank you for attending the tour!<br>
+Please go to the link below <br><br>
 
-Hello
-
-@endsection
+<a href = "{{$email}}">A few questions about youself</a>

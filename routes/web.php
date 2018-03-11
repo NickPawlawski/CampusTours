@@ -51,6 +51,7 @@ Route::group([
         Route::post('/{id}/restore', 'TourController@restore');
 
         Route::get('/email/{id}/{tourId}','TourController@sendEmail')->name('email');
+        Route::get('/email/{id}/{tourId}/reset','TourController@resetAttendee')->name('reset');
     });
 
     Route::resource('majors','MajorsController');

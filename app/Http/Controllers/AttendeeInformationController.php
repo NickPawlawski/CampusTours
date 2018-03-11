@@ -15,8 +15,14 @@ class AttendeeInformationController extends Controller
     
     public function index(Request $request,$id)
     {
-
         $attendee = Attendee::where('token',$id)->firstorfail();
+
+        if($attendee->viewable == 0)
+        {
+            return view("attendeeVisit.attendee_not_viewable");
+        }
+
+
         $majors = Major::get();
         $terms = Term::get();
         $studentTypes = StudentStatus::get();
@@ -36,6 +42,13 @@ class AttendeeInformationController extends Controller
 
     public function update(Request $request, $id)
     {
+        $attendee = Attendee::where('token',$id)->firstorfail();
+        
+         if($attendee->viewable == 0)
+        {
+            return view("attendeeVisit.attendee_not_viewable");
+        }
+
         $errors = $this->validate($request,[
             'address' => 'required',
             'city' => 'required',
@@ -43,7 +56,7 @@ class AttendeeInformationController extends Controller
             'zip' => 'required'
         ]);
 
-        $attendee = Attendee::where('token',$id)->firstorfail();
+       
 
         if($attendee->studentType == 2)
         {
@@ -52,8 +65,7 @@ class AttendeeInformationController extends Controller
                 'hsCity' => 'required',
                 'hsGpa' => 'required',
                 'act' => 'required',
-                'currentGrade' => 'required',
-                'earlyCollege'  => 'exists'
+                'currentGrade' => 'required'
             ]);
         }
         else if ($attendee->studentType == 1)
@@ -86,6 +98,8 @@ class AttendeeInformationController extends Controller
            $attendee->collegegpa = $request->get("collegeGpa");
         }
 
+        $attendee->viewable = 0;
+
         $attendee->save();
 
         return view('admin.attendee_information_complete')->with([
@@ -97,13 +111,6 @@ class AttendeeInformationController extends Controller
 
     public function get_type(Request $request,$id)
     {
-
-        $attendee = Attendee::where('token',$id)->firstorfail();
-
-        $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
-
-        dd($email);
-
         $attendee = Attendee::where('token',$id)->firstorfail();
         $majors = Major::get();
         $terms = Term::get();

@@ -216,11 +216,58 @@ class TourController extends Controller
 
         $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
 
-        Mail::send('emails.reminder', ['user' => $attendee], function ($m) use ($attendee) {
-            $m->from('ngf9321@wmich.edu', 'Nick');
+        Mail::send('emails.reminder', ['user' => $attendee ,'email'=>$email], function ($m) use ($attendee) {
+            $m->from('ngf9321@wmich.edu', 'Nick')
+            ->subject('Campus Tours');
         
             $m->to('ngf9321@wmich.edu');
         });
+
+        $attendee->visited = 1;
+        $attendee->viewable = 1;
+
+        $attendee->save();
+
+        $tour = Tour::find($tourID);
+        $attendees = Attendee::where('tour_id', $tourID)->get();
+        $majors = Major::get();
+        $terms = Term::get();
+        $studentTypes = StudentStatus::get();
+            
+
+        return view('admin.tours.show', [
+            'tour' => $tour,
+            'attendees'=>$attendees,
+            'majors' => $majors,
+            'terms' => $terms,
+            'studentTypes' => $studentTypes
+        ]);   
+    }
+
+    public function resetAttendee(Request $request,$id,$tourID)
+    {
+        $attendee = Attendee::where('token',$id)->firstorfail();
+
+        $attendee->visited = 0;
+        $attendee->viewable = 0;
+
+        $attendee->address = null;
+        $attendee->city = null;
+        $attendee->state = null;
+        $attendee->zip = null;
+
+        $attendee->highschoolname = null;
+        $attendee->highschoolcity = null;
+        $attendee->highschoolgpa = null;
+        $attendee->highschoolact = null;
+        $attendee->highschoolgrade = null;
+
+    
+        $attendee->collegename = null;
+        $attendee->collegecity = null;
+        $attendee->collegegpa = null;
+
+        $attendee->save();
 
         $tour = Tour::find($tourID);
         $attendees = Attendee::where('tour_id', $tourID)->get();
