@@ -30,6 +30,7 @@
       <th width="150">Attended</th>
     </thead>
     @foreach ($attendees as $attendee)
+      @if($attendee->tour_id != null)
       <tr>
       
         <td>{{ $attendee->id }}</td>	
@@ -66,6 +67,7 @@
           </form>
         </td>
       </tr>
+      @endif
     @endforeach
     </table> 
   </div>
