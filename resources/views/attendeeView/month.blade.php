@@ -29,7 +29,7 @@
                   <input class = "button" type = "submit" id = "first"  name = "a" value = "1">
                   <input class = "button" type = "submit" id = "second" name = "a" value = "2">
                   <input class = "button" type = "submit" id = "third"  name = "a" value = "3">
-                  <input class = "button" type = "hidden" name = "attendee" value = "{{$attendee}}">
+                  <input class = "button" type = "hidden" name = "token" value = "{{$attendee->token}}">
                 </div>
               </div>
         </form>

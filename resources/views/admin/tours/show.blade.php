@@ -21,6 +21,7 @@
         <th width="150">Email</th>
         <th width="150">Phone Number</th>
         <th width="150">Visitors</th>
+        <th width="150"></th>
       </thead>
       @foreach ($attendees as $attendee)
         <tr>
@@ -32,17 +33,25 @@
 
           <td>
             <form method = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
-              <input class = "button" type = "submit" value = "View Attendee">
+              @if($attendee->visited == 1 && $attendee->viewable == 1)
+                <input style = "background-color:red;" class = "button" type = "submit" value = "View Attendee">
+              @elseif($attendee->visited == 1 && $attendee->viewable == 0)
+                <input style = "background-color:blue;" class = "button" type = "submit" value = "View Attendee">
+              @else
+              <input style = "background-color:green;" class = "button" type = "submit" value = "View Attendee">
+              @endif
             </form>
           </td>
 		  <td>
         
           @if($attendee->visited == 0)
           <form method = "get" action = "{{ route('email',['id'=>$attendee->token,'tourID'=>$tour->id]) }}">
-            <input class = "button" type = "submit" value = "Attendee Arrival">
+            
+              <input  class = "button" type = "submit" value = "Attendee Arrival">
+            
           </form>
           @else
-            <p>Attendee Email Has Been Sent</p>
+            
           <form method = "get" action = "{{ route('reset',['id'=>$attendee->token,'tourID'=>$tour->id]) }}" class = "attendee_reset">
             <input class = "button" type = "submit" value = "Reset Attendee Arrival">
           </form>

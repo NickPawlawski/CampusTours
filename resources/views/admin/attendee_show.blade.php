@@ -62,7 +62,7 @@
 				<td>First Name</td>
 				<td>{{ $attendee->firstName }}</td>
 				<td>
-					<input type = "text" name = "firstName" value = "{{$attendee->firstName}}">
+					<input type = "text" name = "firstName" placeholder = "{{$attendee->firstName}}">
                     @if ($errors->first('firstName'))
                         <small class="error">{{ $errors->first('firstName') }}</small>
                     @endif
@@ -73,7 +73,7 @@
 				<td>Last Name</td>
 				<td>{{ $attendee->lastName }}</td>
 				<td>
-					<input type = "text" name = "lastName" value = "{{ $attendee->lastName }}">
+					<input type = "text" name = "lastName" placeholder = "{{ $attendee->lastName }}">
                     @if ($errors->first('lastName'))
                         <small class="error">{{ $errors->first('lastName') }}</small>
                     @endif 
@@ -84,20 +84,18 @@
 				<td>Email</td>
 				<td>{{ $attendee->email }}</td>
 				<td>
-					<input type = "text" name = "email" value = "{{ $attendee->email }}">
+					<input type = "text" name = "email" placeholder = "{{ $attendee->email }}">
                     @if ($errors->first('email'))
                         <small class="error">{{ $errors->first('email') }}</small>
                     @endif 
 				</td>
 			</tr>
-
 			
-
 			<tr>
 				<td>Visitors</td>
 				<td>{{ $attendee->visitors }}</td>
 				<td>
-					<input type = "text" name = "Visitors" value = "{{ $attendee->visitors }}">
+					<input type = "text" name = "Visitors" placeholder = "{{ $attendee->visitors }}">
                     @if ($errors->first('Visitors'))
                         <small class="error">{{ $errors->first('Visitors') }}</small>
                     @endif 
@@ -105,6 +103,11 @@
 			</tr>
 		</table>
 		<input class = "button" type = "submit" value = "Update Information">
+	</form>
+	<form  method = "GET" action = "{{ route('attendee.get_type', ['id' => $attendee->token]) }}">
+	{{ csrf_field() }}
+		<input type = "hidden" name = "viewPage" value = "1">
+		<input class = "button" type = "submit" value = "Update Tour Information" >
 	</form>
 </div>
 

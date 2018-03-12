@@ -36,6 +36,7 @@ Route::group([
 
     Route::get('reportdate','GenerateReportController@index')->name('report.date');
     Route::get('report','GenerateReportController@generate')->name('report');
+    Route::post('report','GenerateReportController@downloadReport')->name('download.report');
 
     Route::group([
         'prefix' => 'tours'

@@ -10,7 +10,6 @@
                         <th>Date</th>
                         <th>Time</th>
                     </thead>
-
                     <tbody>
                         @foreach($tours as $tour)
                         <tr>
@@ -20,7 +19,7 @@
                                 <form method = "POST" action = "{{action('HomeController@saveTour',['id'=>$tour->id])}}">
                                 {{ csrf_field() }}
                                     <input class = "button" type = "submit" value = "Attend This Tour">
-                                    <input type = "hidden" name = "attendee" value = "{{ $attendee }}">
+                                    <input type = "hidden" name = "token" value = "{{ $token }}">
                                 </form>
                             </td>
                         </tr>

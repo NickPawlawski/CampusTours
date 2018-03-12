@@ -8,8 +8,8 @@
 </ul>
 
 <div class="row">
+  <h1>Attendee Administration</h1>
   <div class="small-12 medium-6 column">
-    <legend> Majors Admin</legend>
       <table border = "1" id="majors_table">
       <thead>
         <th width="150">First Name</th>
@@ -40,9 +40,10 @@
         </tr>
       @endforeach
 
+    
 
     </table>
-
+    {{ $attendees->links()}}
     <form method = "get" action = "{{route('student.status')}}">
             <input class = "button" type = "submit" value = "View Student Statuses">
     </form>

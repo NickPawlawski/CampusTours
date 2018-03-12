@@ -214,19 +214,26 @@ class TourController extends Controller
     {
         $attendee = Attendee::where('token',$id)->firstorfail();
 
-        $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
-
-        Mail::send('emails.reminder', ['user' => $attendee ,'email'=>$email], function ($m) use ($attendee) {
-            $m->from('ngf9321@wmich.edu', 'Nick')
-            ->subject('Campus Tours');
         
-            $m->to('ngf9321@wmich.edu');
-        });
+        if($attendee->viewable != 1 && $attendee->visited == 0)
+        {
+            $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
 
-        $attendee->visited = 1;
-        $attendee->viewable = 1;
+            Mail::send('emails.reminder', ['user' => $attendee ,'email'=>$email], function ($m) use ($attendee) {
+                $m->from('ngf9321@wmich.edu', 'Nick')
+                ->subject('Campus Tours');
+            
+                $m->to('ngf9321@wmich.edu');
+            });
+        
+            $attendee->visited = 1;
+            $attendee->viewable = 1;
 
-        $attendee->save();
+            $attendee->save();
+        }
+            
+
+        
 
         $tour = Tour::find($tourID);
         $attendees = Attendee::where('tour_id', $tourID)->get();

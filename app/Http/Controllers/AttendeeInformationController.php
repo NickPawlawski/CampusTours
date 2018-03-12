@@ -16,8 +16,10 @@ class AttendeeInformationController extends Controller
     public function index(Request $request,$id)
     {
         $attendee = Attendee::where('token',$id)->firstorfail();
+        
+        //dd($attendee->viewable == 0 && !$request->exists("viewPage"));
 
-        if($attendee->viewable == 0)
+        if($attendee->viewable == 0 && !$request->exists("viewPage"))
         {
             return view("attendeeVisit.attendee_not_viewable");
         }
@@ -44,7 +46,7 @@ class AttendeeInformationController extends Controller
     {
         $attendee = Attendee::where('token',$id)->firstorfail();
         
-         if($attendee->viewable == 0)
+        if($attendee->viewable == 0)
         {
             return view("attendeeVisit.attendee_not_viewable");
         }
@@ -99,7 +101,7 @@ class AttendeeInformationController extends Controller
         }
 
         $attendee->viewable = 0;
-
+        //dd($attendee->viewable);
         $attendee->save();
 
         return view('admin.attendee_information_complete')->with([
@@ -116,7 +118,10 @@ class AttendeeInformationController extends Controller
         $terms = Term::get();
         $studentTypes = StudentStatus::get();
 
-        
+        if($attendee->viewable == 0 && !$request->exists("viewPage"))
+        {
+            return view("attendeeVisit.attendee_not_viewable");
+        }
 
         return view('admin.attendee_information_type')->with([
             'attendee'=>$attendee,

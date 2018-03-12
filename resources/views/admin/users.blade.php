@@ -4,7 +4,7 @@
 
 <ul class="breadcrumbs">
     <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
-    <li class="current"><a href="{{ action('TourController@index') }}">Majors</a></li>
+    <li class="current"><a href="{{ action('UserController@index') }}">Users</a></li>
   </ul>
 
 
