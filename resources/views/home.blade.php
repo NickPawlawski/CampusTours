@@ -59,7 +59,9 @@
           <label for="major">Major
             <select name = "major" id = "major"  value = "other" value = "{{Request::old('major')}}">
               @foreach($majors as $major)
+              @if($major->active == 1)
                 <option value = "{{$major->id}}">{{$major->name}}</option>
+                @endif
               @endforeach
               @if($errors->has('major'))
               <span class = "error" >
@@ -79,8 +81,7 @@
             @endif
         </fieldset>
 
-              
-
+      
         <input class = "button" type = "submit" value = "Submit Form">
     </form>
       <form method = "GET" action = "{{ route('admin.login') }}">

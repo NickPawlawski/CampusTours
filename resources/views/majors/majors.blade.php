@@ -10,71 +10,56 @@
 
 <div class="row">
   <div class="small-12 medium-6 column">
-    <legend> Majors Admin</legend>
+    <h1> Majors Admin</h1>
       <table border = "1" id="majors_table">
       <thead>
-          <th width="150">
-            Major Name
-          </th>
-          <th width="150">
-            Code
-          </th>
-          <th width="150">
-            Graduate
-          </th>
-          <th width="150">
-            Undergraduate
-          </th>
+          <th width="150">Major Name</th>
+          <th width="150">Code</th>
+          <th width="150">Graduate</th>
+          <th width="150">Undergraduate</th>
         </thead>
         <tbody>
-        @foreach ($majors as $major)
-        <tr>
-           <td>{{ $major->name }}</td>
-           <td>{{ $major->code }}</td>	
-           
-           
-           <td>
-            @if($major->graduate)
-            Yes
-            @else
-            No
-            @endif
-            </td>
-           
-           <td> 
-            @if($major->undergraduate)
-            Yes
-            @else
-            No
-            @endif   
-           </td>
-           
-           <td>
-             <form method="POST" action = "{{ action('MajorsController@make_visible') }}"> 
-             {{ csrf_field() }}
-             <input type = "hidden" name = "id" value = "{{$major->id}}">
-            
-             @if($major->active == 1)
-                   <input class = "button" type = "submit" value = "Make Inactive">
-             @else
-                   <input class = "button" type = "submit" value = "Make Active">
-             @endif
-            </form>
-            <td>    
-                <form method = "GET" action = "{{ action('MajorsController@show',['id'=>$major->id])}}">
-                    <input class = "button" type = "submit" value = "Update Major">
-                </form>
-            </td>
+        @foreach($majors as $major)
+            @if($major->active == 1)
+            <tr>
+            <td>{{ $major->name }}</td>
+            <td>{{ $major->code }}</td>	
 
-            <td>    
-                <form method = "POST" action = "{{ route('majors.destroy',['id'=>$major->id])}}">
-                {{ method_field('DELETE') }}
-                {{ csrf_field() }}
-                    <input class = "button" type = "submit" value = "Delete Major">
-                </form>
+            <td>
+                @if($major->graduate)
+                Yes
+                @else
+                No
+                @endif
+                </td>
+            
+            <td> 
+                @if($major->undergraduate)
+                Yes
+                @else
+                No
+                @endif   
             </td>
-        </tr>
-    @endforeach
+            
+            <td>
+                <form method="POST" action = "{{ action('MajorsController@make_visible') }}"> 
+                {{ csrf_field() }}
+                <input type = "hidden" name = "id" value = "{{$major->id}}">
+                
+                @if($major->active == 1)
+                    <input class = "button" type = "submit" value = "Make Inactive">
+                @else
+                    <input class = "button" type = "submit" value = "Make Active">
+                @endif
+                </form>
+                <td>    
+                    <form method = "GET" action = "{{ action('MajorsController@show',['id'=>$major->id])}}">
+                        <input class = "button" type = "submit" value = "Update Major">
+                    </form>
+                </td>
+            </tr>
+            @endif
+        @endforeach
     </tbody>
     </table>
 
@@ -133,6 +118,11 @@
     </table>
 
     <input class = "button" type = "submit" value = "Create Major">
+</form>
+
+<form method = "POST" action = "{{ route('show.active') }}">
+    {{ csrf_field() }}
+    <input type = "submit" class = "button" value = "Show Inactive Majors">
 </form>
 
 </div>

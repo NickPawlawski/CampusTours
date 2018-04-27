@@ -38,7 +38,7 @@ class TourController extends Controller
         $tours = Tour::whereBetween('date', [$filterDateStart, $filterDateEnd])
             ->orderBy('date')
             ->orderBy('time')
-            ->paginate(15);
+            ->paginate(5);
 
         // Return the tours view.
         return view('admin.tours.index', [

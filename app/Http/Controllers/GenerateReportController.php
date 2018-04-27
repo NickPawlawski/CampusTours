@@ -40,7 +40,7 @@ class GenerateReportController extends Controller
         $majors = Major::get();
         $terms = Term::get();
         $studentTypes = StudentStatus::get();
-        //dd($attendees);
+        
         return view('admin.report.show_report')->with([
             'attendees'=>$attendees,
             'majors'=>$majors,
@@ -71,10 +71,8 @@ class GenerateReportController extends Controller
       foreach ($attendees as $attendee) {
         if($attendee->tour_id != null)
         {
-          $id = $attendee->id;
   
           $temp = array();
-          $temp['ID'] = $id;
           $temp['FirstName'] = $attendee->firstName;
           $temp['LastName'] = $attendee->lastName;
           $temp['Email'] = $attendee->email;
@@ -86,17 +84,50 @@ class GenerateReportController extends Controller
           if($attendee->studentType != null)
             $temp['StudentType'] = $studentTypes[$attendee->studentType-1]->name;
           else
-            $temp['StudentType'] ="Unknown";
+            $temp['StudentType'] ="";
     
           if($attendee->startTerm != null)
             $temp['StartTerm'] = $terms[$attendee->startTerm-1]->name;
           else
-            $temp['StartTerm'] ="Unknown";
+            $temp['StartTerm'] ="asd";
           
           $temp['Considerations'] = $attendee->considerations;
           $temp['Visitors'] = $attendee->visitors;
           $temp['Attended'] = $attendee->attended == 0 ? "No" : "Yes"; 
     
+          if($attendee->address != null)
+          {
+            $temp['Address'] = $attendee->address;
+            $temp['City'] = $attendee->city;
+            $temp['State'] = $attendee->state;
+            $temp['Zip'] = $attendee->zip;
+          }
+          else
+          {
+            $temp['Address'] = "";
+            $temp['City'] = "";
+            $temp['State'] = "";
+            $temp['Zip'] = "";
+          }
+          
+          if($attendee->highschoolname != null)
+          {
+            $temp['HighschoolName'] = $attendee->highschoolname;
+          }
+          else
+          {
+            $temp['HighschoolName'] = "";
+          }
+
+          if($attendee->collegename != null)
+          {
+            $temp['CollegeName'] = $attendee->collegename;
+          }
+          else
+          {
+            $temp['collegCollegeNameeName'] = "";
+          }
+
           $formattedarray[$index] = $temp;
           $index++;
         }

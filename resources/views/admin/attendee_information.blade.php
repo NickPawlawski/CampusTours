@@ -49,7 +49,7 @@
 		</label>
 		
 		<label for="term">
-		<p>Intended Western Entry Semester</p>
+		<p>Intended WMU Entry Semester</p>
             <select name = "term" id = "term" value = "other">
                 @foreach($terms as $term)
                   <option value = "{{$term->id}}">{{$term->name}}</option>

@@ -5,6 +5,8 @@
 	<div class="small-12 columns">
             <h1>Please select the tour you would like to Attend.</h1>
             <h2>If you would like to change months, use the back button in your browser</h2>
+                
+            @if($tours->isNotEmpty())
                 <table>
                     <thead>
                         <th>Date</th>
@@ -25,8 +27,13 @@
                         </tr>
                         @endforeach
                     </tbody>
-
                 </table>
+            @else
+                <h3>There are no Tours available for this month. <br>
+                Please use the back button in your browser to return to the month selection.</h3>
+            @endif
+
+            <p>If you would like to attend a tour on a date or time that is not listed please call 269-276-3270 and tours can be added upon request.</p>
     </div>  
 </div>
 

@@ -59,7 +59,7 @@ Route::group([
     Route::group([
         'prefix' => 'majors'
     ], function() {
-        
+        Route::post('/show_active', 'MajorsController@active')->name('show.active');
         Route::post('/make_visible','MajorsController@make_visible');
         
     });

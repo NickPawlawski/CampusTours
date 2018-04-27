@@ -46,7 +46,7 @@ class AttendeeInformationController extends Controller
     {
         $attendee = Attendee::where('token',$id)->firstorfail();
         
-        if($attendee->viewable == 0)
+        if($attendee->viewable == 0 && !$request->exists("viewPage"))
         {
             return view("attendeeVisit.attendee_not_viewable");
         }
@@ -83,6 +83,7 @@ class AttendeeInformationController extends Controller
         $attendee->city = $request->get("city");
         $attendee->state = $request->get("state");
         $attendee->zip = $request->get("zip");
+        $attendee->startTerm = $request->get("term");
 
         if($attendee->studentType == 2)
         {

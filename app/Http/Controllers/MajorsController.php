@@ -15,7 +15,7 @@ class MajorsController extends Controller
         ->paginate(15)
         ->all();
         
-        return view('admin.majors',['majors' => $majors]);
+        return view('majors.majors',['majors' => $majors]);
     }
 
     public function store(Request $request)
@@ -64,9 +64,16 @@ class MajorsController extends Controller
 
     public function show(Request $request, $id)
     {
-        $major = Major::find($id);
+        $majors = Major::find($id);
         
-        return view('admin.major_show',['major' => $major]);
+        return view('majors.major_show',['majors' => $majors]);
+    }
+
+    public function active(Request $request)
+    {
+        $majors = Major::where('active',0)->get();
+        
+        return view('majors.major_active',['majors' => $majors]);
     }
 
     public function update(Request $request, $id)
