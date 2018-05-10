@@ -7,7 +7,7 @@
       var d = new Date;
       var i = d.getMonth();
 
-      var months = ["January","Febuary","March","April","May","June"];
+      var months = ["January","Febuary","March","April","May","June","July"];
 
 
       document.getElementById("first").value = months[i];

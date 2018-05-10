@@ -12,11 +12,11 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/month', 'HomeController@monthSelection')->name('monthSelection');
+Route::post('/','MonthSelectionController@store')->name('home.store');
 
 Route::get('/month/tour', 'HomeController@tourSelection')->name('getTourSelection');
 Route::post('/month/tour/{id}', 'HomeController@saveTour')->name('submit.tour');
-Route::post('/','HomeController@store')->name('home.store');
+
 
 Route::get('login','LoginController@login')->name('login');
 Auth::routes();

@@ -78,11 +78,6 @@ class HomeController extends Controller
         return view('attendeeView.month',['attendee' => $attendee]);
     }
 
-    public function monthSelction(Request $request,$id)
-    {
-        return view(route('monthSelection')->with(['attendee'=>$attendee]));
-    }
-
     public function tourSelection(Request $request)
     {
         $token = $request->get("token");
