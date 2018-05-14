@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/','MonthSelectionController@store')->name('home.store');
+Route::get('/stuff','MonthSelectionController@store')->name('home.store');
 
 Route::get('/month/tour', 'HomeController@tourSelection')->name('getTourSelection');
 Route::post('/month/tour/{id}', 'HomeController@saveTour')->name('submit.tour');
@@ -68,7 +68,9 @@ Route::group([
     Route::group([
         'prefix' => 'attendee'
     ], function(){
-        
+       
+        Route::post('/search','AttendeesController@search')->name('attendee.search');
+        Route::post('/searchDate','AttendeesController@searchDate')->name('attendee.search.date');
         Route::get('/student_status','StudentStatusController@index')->name('student.status');
         Route::put('/student_status/{id}','StudentStatusController@update')->name('student.status.update');
         Route::delete('/student_status/{id}','StudentStatusController@delete')->name('student.status.delete');

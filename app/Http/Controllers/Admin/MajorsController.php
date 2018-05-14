@@ -64,9 +64,9 @@ class MajorsController extends Controller
 
     public function show(Request $request, $id)
     {
-        $majors = Major::find($id);
-        
-        return view('majors.major_show',['majors' => $majors]);
+        $major = Major::where('id',$id)->firstorfail();
+
+        return view('majors.major_show',['major' => $major]);
     }
 
     public function active(Request $request)

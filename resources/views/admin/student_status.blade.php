@@ -9,11 +9,13 @@
 
 <div class="row">
     <div class="small-12 medium-6 column">
-    <legend> Student Status</legend>
+    <h1> Student Status</h1>
         <table border = "1" id="majors_table">
         <thead>
-            <th>Student Status Name</th>
-            <th>New Status Name</th>
+            <th >Student Status Name</th>
+            <th >New Status Name</th>
+            <th >Update Status</th>
+            <th >Delete Status</th>
         </thead>
 
         @foreach ($studentStatus as $student_status)
@@ -24,23 +26,13 @@
 
         @if($student_status->name == "N/A")
         <tr>
-            <td>
-                {{ "Deleted Status"}}
-            </td>
-            <td>
-                {{ $student_status->old_name }}
-            </td>
-            <td>
-                <input class = "button" type = "submit" value = "Restore Status">
-            </td>
+            <td>{{ "Deleted Status"}}</td>
+            <td>{{ $student_status->old_name }}</td>
+            <td><input style = "background-color:blue;" class = "button" type = "submit" value = "Restore Status"></td>
         </tr>
         @else
-
             <tr>
-                <td>
-                {{ $student_status->name }}
-                    
-                </td>
+                <td>{{ $student_status->name }}</td>
                 <td>
                     <input type = "text" name = "name" value = "">
                     @if ($errors->first('name'))
@@ -48,7 +40,7 @@
                     @endif
                 </td>
                 <td>
-                    <input class = "button" type = "submit" value = "Save Status">
+                    <input class = "button" type = "submit" value = "Update Status">
                 </td>
         </form>
         
@@ -57,26 +49,28 @@
             {{ csrf_field() }}
 		    {{ method_field('DELETE') }}
             <td>
-              <input class = "button" type = "submit" value = "Delete Status">
+              <input class = "button alert" type = "submit" value = "Delete Status">
             </td>
             </tr>
         </form>
         @endif
         @endforeach
 
+        
+        </table>
+        <fieldset>
         <form method = "POST" action = "{{route('student.status.create')}}">
             {{ csrf_field() }}
-            <td></td>
-            <td>
-                <input type = "text" name = "name" value = "" >
-                @if ($errors->first('name'))
-                    <small class="error">{{ $errors->first('name') }}</small>
-                @endif
-            </td>
-            <td>
-              <input class = "button" type = "submit" value = "Create New Status">
-            </td>
-        </table>
+            <label for = "name">Create New Status:</label>
+            <input type = "text" name = "name" value = "" >
+            @if ($errors->first('name'))
+                <small class="error">{{ $errors->first('name') }}</small>
+            @endif
+        
+            <input class = "button" type = "submit" value = "Create New Status">
+            
+        </form>
+        </fieldset>
     </div>
 </div>
 

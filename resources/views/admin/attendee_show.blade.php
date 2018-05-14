@@ -9,7 +9,7 @@
 
 <div>
   <h1>Attendee: {{ $attendee->firstName }} {{$attendee->lastName}}</h1>
-	<form method = "POST" action = "{{ action('AttendeesController@update', ['id' => $attendee->id]) }}">
+	<form method = "POST" action = "{{ action('AttendeesController@show', ['id' => $attendee->id]) }}">
 		{{ csrf_field() }}
 		{{ method_field('PUT') }}
 		<table border = "1" id="majors_table">
@@ -50,7 +50,8 @@
 			</tr>
 		</table>
 
-
+		<fieldset>
+		<legend>Update Attendees Information</legend>
 		<table border = "1" id = "edit_table">
 			<thead>
 				<th>Information Type</th>
@@ -102,7 +103,9 @@
 				</td>
 			</tr>
 		</table>
+		
 		<input class = "button" type = "submit" value = "Update Information">
+		</fieldset>
 	</form>
 	<form  method = "GET" action = "{{ route('attendee.get_type', ['id' => $attendee->token]) }}">
 	{{ csrf_field() }}
