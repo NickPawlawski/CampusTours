@@ -39,12 +39,48 @@ class TourController extends Controller
             ->orderBy('date')
             ->orderBy('time')
             ->paginate(5);
+        
+        
+        
+        $todayTours = Array();
+        $todayToursAttendee = Array();
+        $todayToursVisitor = Array();
+        foreach($tours as $tour)
+        {
+            $attendeeGroup = Attendee::where('tour_id','=',$tour->id)->get();
+            //dd($tour->id);
+
+            $sum = 0;
+            
+            foreach($attendeeGroup as $attend)
+            {
+                //echo($attend->visitors);
+                $sum += $attend->visitors;
+            }
+            $attendeeTotal[] = $attendeeGroup->count();
+            $visitorTotal[] = $sum;
+
+            if($tour->date->format('Y-m-d') == Carbon::now()->format('Y-m-d'))
+            {
+                $todayTours[] = $tour;
+                $todayToursAttendee[] = $attendeeGroup->count();
+                $todayToursVisitor[] = $sum;
+            }
+            //dd($sum);
+        }
+        
+        
 
         // Return the tours view.
         return view('admin.tours.index', [
             'tours' => $tours,
             'filterDateStart' => $filterDateStart,
             'filterDateEnd' => $filterDateEnd,
+            'visitorTotal' => $visitorTotal,
+            'attendeeTotal' => $attendeeTotal,
+            'todayTours' => $todayTours,
+            'todayToursAttendee' => $todayToursAttendee,
+            'todayToursVisitor' =>  $todayToursVisitor
         ]);
     }
 
@@ -220,10 +256,10 @@ class TourController extends Controller
             $email = "http://localhost/campustours/index.php/attendee_information/$attendee->token/type?";
 
             Mail::send('emails.reminder', ['user' => $attendee ,'email'=>$email], function ($m) use ($attendee) {
-                $m->from('ngf9321@wmich.edu', 'Nick')
+                $m->from('cae-programmers@wmich.edu', 'Nick')
                 ->subject('Campus Tours');
             
-                $m->to('ngf9321@wmich.edu');
+                $m->to($attendee->email);
             });
         
             $attendee->visited = 1;

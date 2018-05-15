@@ -1,11 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
+
   <ul class="breadcrumbs">
     <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
     <li class="current"><a href="{{ action('TourController@index') }}">Tours</a></li>
   </ul>
   <div class="row">
+    @if(count($todayTours) > 0)
+    <div class = "small-12 medium-12 column">
+      <fieldset>
+      <legend>Today's Tours for {{Carbon\Carbon::now()->format('d-m-Y')}}</legend>
+      <div class="small-12 medium-12 column">
+      <table>
+        <thead>
+          <th width="150">Tour Time</th>
+          <th width="150">Visitors</th>
+          <th width="150">Attendees</th>
+          <th width="150">Actions</th>
+        </thead>
+        <tbody>
+          @for ($x = 0; $x < count($todayTours); $x++)
+            <tr>
+              <td>{{ date('h:i A', strtotime($todayTours[$x]->time)) }}</td>
+              <td>{{ $todayToursAttendee[$x]}}</td>
+              <td>{{ $todayToursVisitor[$x]}}</td>
+              <td>
+                <form method="POST" action="{{ action('TourController@delete', ['id' => $tours[$x]->id]) }}" class="tour_delete">
+                  {{ method_field('DELETE') }}
+                  {{ csrf_field() }}
+                  <a class="button tiny tour_show" href="{{ action('TourController@show', ['id' => $tours[$x]->id]) }}">?</a>
+                  <input class="button tiny" type="submit" value="X">
+                </form>
+              </td>
+            </tr>
+          @endfor
+        </tbody>
+      </table>
+    </div>
+    </div>
+    @endif
+ 
+
     <div class="small-12 medium-6 column">
       <!-- Filter tours form -->
       <form method="GET" action="{{ action('TourController@index') }}">
@@ -21,8 +57,9 @@
           <a href="{{ action('TourController@index') }}" class="button alert">Clear Filter</a>
         </fieldset>
       </form>
-
+    </div>
       <!-- Add tour form -->
+    <div class="small-12 medium-6 column">
       <form method="POST" action="{{ action('TourController@store') }}">
         <fieldset>
           <legend>Add Tour</legend>
@@ -42,8 +79,10 @@
           <input class="button" type="submit" value="Add Tour">
         </fieldset>
       </form>
+    </div>
 
        <!-- Add multiple tours form -->
+       <div class="small-12 medium-6 column">
       <form method="POST" action="{{ action('TourController@storeMultiple') }}">
         <fieldset>
           <legend>Add Multiple Tours</legend>
@@ -102,9 +141,11 @@
           <input class="button" type="submit" value="Add Tours">
         </fieldset>
       </form>
-    </div>
+      </div>
+    
 
     <!-- Delete Multiple tours form -->
+    <div class="small-12 medium-6 column">
     <form method="POST" action="{{ action('TourController@deleteMultiple') }}">
       {{ method_field('DELETE') }}
       <fieldset>
@@ -135,46 +176,50 @@
         <input class="button" type="submit" value="Delete Tours">
       </fieldset>
     </form>
-  </div>
+    </div>
+  
 
     <!-- Tours table -->
-    <div class="small-12 medium-6 column">
+    <div class="small-12 medium-12 column">
+    <fieldset>
+      <legend>Upcoming Tours</legend>
+      <div class="small-12 medium-12 column">
       <table>
         <thead>
-          <th width="150">
-            Tour Date
-          </th>
-          <th width="150">
-            Tour Time
-          </th>
-          <th width="150">
-            Actions
-          </th>
+          <th width="150">Tour Date</th>
+          <th width="150">Tour Time</th>
+          <th width="150">Visitors</th>
+          <th width="150">Attendees</th>
+          <th width="150">Actions</th>
         </thead>
         <tbody>
-          @foreach ($tours as $tour)
+          @for ($x = 0; $x < $tours->count(); $x++)
             <tr>
-              <td>{{ date('m/d/Y', $tour->date->timestamp) }}</td>
-              <td>{{ date('h:i A', strtotime($tour->time)) }}</td>
+              <td>{{ date('m/d/Y', $tours[$x]->date->timestamp) }}</td>
+              <td>{{ date('h:i A', strtotime($tours[$x]->time)) }}</td>
+              <td>{{ $visitorTotal[$x]}}</td>
+              <td>{{ $attendeeTotal[$x]}}</td>
               <td>
-                <form method="POST" action="{{ action('TourController@delete', ['id' => $tour->id]) }}" class="tour_delete">
+                <form method="POST" action="{{ action('TourController@delete', ['id' => $tours[$x]->id]) }}" class="tour_delete">
                   {{ method_field('DELETE') }}
                   {{ csrf_field() }}
-                  <a class="button tiny tour_show" href="{{ action('TourController@show', ['id' => $tour->id]) }}">?</a>
+                  <a class="button tiny tour_show" href="{{ action('TourController@show', ['id' => $tours[$x]->id]) }}">?</a>
                   <input class="button tiny" type="submit" value="X">
                 </form>
               </td>
             </tr>
-          @endforeach
+          @endfor
         </tbody>
       </table>
 
       <a href="{{ action('TourController@deleted') }}">Restore Deleted Tours</a>
 
       {{ $tours->appends(['filterDateStart' => $filterDateStart, 'filterDateEnd' => $filterDateEnd])->links() }}
-    </div>
-  </div>
 
+      </div>
+    </fieldset>
+  </div>
+</div>
   <script>
     /*$("#filterDateStart").on("blur", function() {
       // If the start date is specified but the end date isn't, make them match.

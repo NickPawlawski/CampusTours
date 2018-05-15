@@ -32,8 +32,6 @@ class HomeController extends Controller
         $tours = Tour::where('date','>',date('Y-m-d'))->orderby('date')->get();
 
         $statuses = StudentStatus::all();
-        
-        //dd($tours);
 
         return view('home')->with(['majors'=>$majors,'tours'=>$tours,'statuses'=>$statuses]);
     }
@@ -93,12 +91,8 @@ class HomeController extends Controller
             $dateStart = Carbon::parse('first day of '.$month.' 2018')->format("Y-m-d");
         }
 
-
-        
         $dateEnd = Carbon::parse('last day of '.$month.' 2018')->format("Y-m-d");
-        //dd($dateStart);
-        //dd($dateEnd);
-        
+                
         $tours = Tour::wherebetween('date',[$dateStart, $dateEnd])->orderBy('date')
         ->orderBy('time')
         ->paginate(15);
@@ -117,6 +111,9 @@ class HomeController extends Controller
         
         
         $tour = Tour::find($id);
+
+        
+
 
         return view("attendeeView.success")->with(['attendee'=>$attendee,'tour'=>$tour]);
     }

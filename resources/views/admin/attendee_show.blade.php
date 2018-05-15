@@ -96,9 +96,9 @@
 				<td>Visitors</td>
 				<td>{{ $attendee->visitors }}</td>
 				<td>
-					<input type = "text" name = "Visitors" placeholder = "{{ $attendee->visitors }}">
-                    @if ($errors->first('Visitors'))
-                        <small class="error">{{ $errors->first('Visitors') }}</small>
+					<input type = "text" name = "visitors" placeholder = "{{ $attendee->visitors }}">
+                    @if ($errors->first('visitors'))
+                        <small class="error">{{ $errors->first('visitors') }}</small>
                     @endif 
 				</td>
 			</tr>
