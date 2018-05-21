@@ -18,6 +18,7 @@
 			<li><a class= "button" href="{{ url('admin/attendees') }}">Attendees</a></li>
 			<li><a class= "button" href="{{ url('admin/user') }}">Users</a></li>
 			<li><a class= "button" href="{{ url('admin/reportdate') }}">Report</a></li>
+			<li><a class= "button" href="{{ url('admin/bugs') }}">Report Bug</a></li>
 		</ul>
 	</div>
 	</fieldset>

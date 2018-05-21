@@ -77,11 +77,22 @@ Route::group([
         Route::post('/student_status','StudentStatusController@create')->name('student.status.create');
     });
 
+    //Route::resource('bugs','BugsController');
+    Route::group([
+        'prefix' => 'bugs'
+    ], function(){
+        Route::post('add_bug','BugsController@addBug')->name('add.bug');
+        Route::get('/sqashed_bugs','BugsController@old')->name('inactive.show');
+        Route::get('/{id}','BugsController@show')->name('bug.show');
+        Route::post('/{id}','BugsController@update')->name('bug.update');
+        Route::get('/','BugsController@index');
+    });
+
     Route::resource('user','UserController');
     Route::group([
         'prefix' => 'user'
     ], function(){
-
+        
 
     
     });

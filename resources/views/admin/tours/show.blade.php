@@ -13,66 +13,63 @@
       {{ date('m/d/Y', strtotime($tour->date))}}
       {{ date('h:i A', strtotime($tour->time))}}
     </h3>
-  
-		<table border = "1" id="majors_table">
-      <thead>
-        <th width="150">First Name</th>
-        <th width="150">Last Name</th>
-        <th width="150">Email</th>
-        <th width="150">Phone Number</th>
-        <th width="150">Visitors</th>
-        <th width="150"></th>
-      </thead>
-      @foreach ($attendees as $attendee)
-        <tr>
-          <td>{{ $attendee->firstName }}</td>
-          <td>{{ $attendee->lastName }}</td>	
-          <td>{{ $attendee->email }}</td>
-          <td>{{ $attendee->phone }}</td>	
-          <td>{{ $attendee->visitors }}</td>	
+    <fieldset>
+    @if(count($attendees) > 0)
+      <table border = "1" id="majors_table">
+        <thead>
+          <th width="150">First Name</th>
+          <th width="150">Last Name</th>
+          <th width="150">Email</th>
+          <th width="150">Phone Number</th>
+          <th width="150">Visitors</th>
+          <th width="150"></th>
+        </thead>
+        
+        @foreach ($attendees as $attendee)
+          <tr>
+            <td>{{ $attendee->firstName }}</td>
+            <td>{{ $attendee->lastName }}</td>	
+            <td>{{ $attendee->email }}</td>
+            <td>{{ $attendee->phone }}</td>	
+            <td>{{ $attendee->visitors }}</td>	
 
-          <td>
-            <form method = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
-              @if($attendee->visited == 1 && $attendee->viewable == 1)
-                <input style = "background-color:red;" class = "button" type = "submit" value = "View Attendee">
-              @elseif($attendee->visited == 1 && $attendee->viewable == 0)
-                <input style = "background-color:blue;" class = "button" type = "submit" value = "View Attendee">
-              @else
-              <input style = "background-color:green;" class = "button" type = "submit" value = "View Attendee">
-              @endif
+            <td>
+              <form method = "get" action = "{{action('AttendeesController@show',['id'=>$attendee->id])}}">
+                @if($attendee->visited == 1 && $attendee->viewable == 1)
+                  <input style = "background-color:red;" class = "button" type = "submit" value = "View Attendee">
+                @elseif($attendee->visited == 1 && $attendee->viewable == 0)
+                  <input style = "background-color:blue;" class = "button" type = "submit" value = "View Attendee">
+                @else
+                <input style = "background-color:green;" class = "button" type = "submit" value = "View Attendee">
+                @endif
+              </form>
+            </td>
+            <td>
+              @if($attendee->visited == 0)
+              <form method = "get" action = "{{ route('email',['id'=>$attendee->token,'tourID'=>$tour->id]) }}">
+              
+                <input  class = "button" type = "submit" value = "Attendee Arrival">
+              
+              </form>
+            @else
+              
+            <form method = "get" action = "{{ route('reset',['id'=>$attendee->token,'tourID'=>$tour->id]) }}" class = "attendee_reset">
+              <input class = "button" type = "submit" value = "Reset Attendee Arrival">
             </form>
+            @endif
           </td>
-		  <td>
-        
-          @if($attendee->visited == 0)
-          <form method = "get" action = "{{ route('email',['id'=>$attendee->token,'tourID'=>$tour->id]) }}">
-            
-              <input  class = "button" type = "submit" value = "Attendee Arrival">
-            
-          </form>
-          @else
-            
-          <form method = "get" action = "{{ route('reset',['id'=>$attendee->token,'tourID'=>$tour->id]) }}" class = "attendee_reset">
-            <input class = "button" type = "submit" value = "Reset Attendee Arrival">
-          </form>
-          @endif
-        
-		  </td>
         </tr>
-      @endforeach
-	  </table>
+        @endforeach
+        </table>
+      @else
+        <h3>There are no attendees for this tour</h3>
+      @endif
+      </fieldset>
+	  
 	</div>
 </div>
 
 <script>
-    /*$("#filterDateStart").on("blur", function() {
-      // If the start date is specified but the end date isn't, make them match.
-      if ($("#filterDateStart").val() !== '' && $("#filterDateEnd").val() === '') {
-        // Make the end date match the start.
-        $("#filterDateEnd").val($("#filterDateStart").val());
-      }
-    });*/
-
     $(".attendee_reset").on("submit", function() {
       return confirm("Reset this Attendee?");
     });
