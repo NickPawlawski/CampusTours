@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    public $table = 'Pages';
+    public $table = 'pages';
 
     public function bug()
     {
