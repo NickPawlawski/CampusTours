@@ -51,6 +51,11 @@
 		</table>
 
 		<fieldset>
+			<legend>Considerations</legend>
+			{{ $attendee->considerations}}
+		</fieldset>
+
+		<fieldset>
 		<legend>Update Attendees Information</legend>
 		<table border = "1" id = "edit_table">
 			<thead>

@@ -15,7 +15,7 @@ class AttendeesController extends Controller
   public function index(Request $request)
   {
     $attendees = Attendee::orderBy('lastName', 'asc')->where('tour_id','!=',NULL)
-    ->paginate(15);
+    ->paginate(5);
     
     $studentTypes = StudentStatus::get();
 
@@ -79,7 +79,7 @@ class AttendeesController extends Controller
   {
     //dd($request->get('parameter'));
     $attendees = Attendee::orderBy('lastName', 'asc')->where([[$request->get('parameter'),'LIKE',"%".$request->get('searchValue')."%"],['tour_id','!=',NULL]])
-    ->paginate(15);
+    ->paginate(5);
     
     $studentTypes = StudentStatus::get();
 
@@ -111,7 +111,7 @@ class AttendeesController extends Controller
 
     
     $attendees = Attendee::orderBy('lastName', 'asc')->wherein('tour_id',$tours)
-    ->paginate(15);
+    ->paginate(5);
     
     $studentTypes = StudentStatus::get();
 
