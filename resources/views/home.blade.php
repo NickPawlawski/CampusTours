@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="small-12 columns">
         <h1>Welcome to Floyd Hall Tours</h1>
-        <h2>Please fill out the information below. Everything but considerations is required.</h2>
+        <h2>Please fill out the information below.</h2>
         <form method = "get" action = "{{ route('home.store') }}">
         {{ csrf_field() }}
 

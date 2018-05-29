@@ -7,13 +7,14 @@
 	<li class="current"><a href="">Show Tour</a></li>
 </ul>
 <div class="row">
-	<div class="small-12 columns">
+	<div class="small-12 medium-12 columns">
 		<h1>Tour {{ $tour->id }}</h1>
 		<h3>
       {{ date('m/d/Y', strtotime($tour->date))}}
       {{ date('h:i A', strtotime($tour->time))}}
     </h3>
     <fieldset>
+    <legend>Attendees</legend>
     @if(count($attendees) > 0)
       <table border = "1" id="majors_table">
         <thead>
@@ -67,6 +68,28 @@
       </fieldset>
 	  
 	</div>
+
+  <div class = "small-12 medium-12 columns">
+    <fieldset>
+      <legend>Considerations for this tour</legend>
+      <table>
+        <thead>
+          <th>Attendee's Name</th>
+          <th>Consideration</th>
+        </thead>
+        <tbody>
+        @foreach($attendees as $attendee)
+          @if($attendee->considerations != null)
+          <tr>
+              <td>{{ $attendee->firstName}}</td>
+              <td>{{ $attendee->considerations}}</td>
+          </tr>
+          @endif
+        @endforeach
+      </tbody>
+      </table>
+    </fieldset>
+  </div>
 </div>
 
 <script>
