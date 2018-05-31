@@ -7,6 +7,7 @@ use App\Major;
 use App\Tour;
 use App\StudentStatus;
 use App\Attendee;
+use App\Links;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -112,9 +113,11 @@ class HomeController extends Controller
         
         $tour = Tour::find($id);
 
+        $links = Links::where('active',1)->get();
+        
+                
         
 
-
-        return view("attendeeView.success")->with(['attendee'=>$attendee,'tour'=>$tour]);
+        return view("attendeeView.success")->with(['attendee'=>$attendee,'tour'=>$tour,'links'=>$links]);
     }
 }

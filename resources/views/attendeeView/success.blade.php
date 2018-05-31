@@ -22,9 +22,14 @@
     
     <div class="small-12 medium-12 columns">
         <br>
-        <h2>Other Links</h2>
-        Schedule a Tour of the Main Campus <a href = "https://wmich.edu/admissions/freshmen/visit">here</a>
-
+        @if(count($links) > 0)
+            <h2>News and Other Links About the College</h2>
+            <ul>
+            @foreach($links as $link)
+                <li>{{$link['description']}} <a href="{{$link->link}}">here</a></li>
+            @endforeach
+            </ul>
+        @endif
     </div>
 
 </div>

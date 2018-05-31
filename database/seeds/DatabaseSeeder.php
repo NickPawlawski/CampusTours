@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TermSeeder::class);
         $this->call(PageSeeder::class);
         $this->call(BugStatusSeeder::class);
+        $this->call(LinksSeeder::class);
     }
 }
