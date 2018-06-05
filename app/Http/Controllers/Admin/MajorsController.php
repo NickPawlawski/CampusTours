@@ -12,8 +12,7 @@ class MajorsController extends Controller
     {
         // Build a query
         $majors = Major::orderBy('name', 'desc')
-        ->paginate(15)
-        ->all();
+        ->paginate(5);
         
         return view('majors.majors',['majors' => $majors]);
     }

@@ -9,14 +9,18 @@
 
 
 <div class="row">
-  <div class="small-12 medium-6 column">
-    <h1> Majors Admin</h1>
+  <div class="small-12 medium-12 column">
+    <h1> Majors Administration</h1>
+    <fieldset>
+    <legend>Majors</legend>
       <table border = "1" id="majors_table">
       <thead>
           <th width="150">Major Name</th>
           <th width="150">Code</th>
           <th width="150">Graduate</th>
           <th width="150">Undergraduate</th>
+          <th>Make Inactive</th>
+          <th>Update</th>
         </thead>
         <tbody>
         @foreach($majors as $major)
@@ -62,7 +66,8 @@
         @endforeach
     </tbody>
     </table>
-
+    {{ $majors->links() }}
+    </fieldset>
     <legend> Add Major </legend>
     <form method = "POST" action = "{{ action('MajorsController@store') }}">
     {{ csrf_field() }}

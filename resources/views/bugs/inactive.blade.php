@@ -5,6 +5,7 @@
 <ul class="breadcrumbs">
 	<li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
 	<li><a href="{{ url('admin/bugs') }}">Bug Reporter</a></li>
+    <li class = "current"><a href = "{{action('BugsController@old')}}">Squashed Bugs</a></li>
 	
 </ul>
 <div>

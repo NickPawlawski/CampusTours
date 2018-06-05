@@ -4,6 +4,7 @@ ul.breadcrumbs {
 	margin: 0;
 	padding: 0;
 	margin-bottom: 1rem;
+	
 }
 
 ul.breadcrumbs > li {
@@ -39,3 +40,4 @@ a.button.info,
 a.button.disabled {
 	border-radius: 0;
 }
+

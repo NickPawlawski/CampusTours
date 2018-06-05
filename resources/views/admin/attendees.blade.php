@@ -3,26 +3,26 @@
 @section('content')
 
 <ul class="breadcrumbs">
-    <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
-    <li class="current"><a href="{{ action('AttendeesController@index') }}">Attendees</a></li>
+  <li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
+  <li class="current"><a href="{{ action('AttendeesController@index') }}">Attendees</a></li>
 </ul>
 
 <div class="row">
   <h1>Attendee Administration</h1>
   {{ csrf_field() }}
-  <div class="small-12 medium-6 column">
+  <div class="small-12 medium-12 column">
   <fieldset>
     <legend>Attendees</legend>
     @if($attendees->count() > 0)
       <table border = "1" id="majors_table">
       <thead>
-        <th width="150">First Name</th>
-        <th width="150">Last Name</th>
-        <th width="150">Email</th>
-        <th width="150">Phone Number</th>
-        <th width="150">Type</th>
-        <th width="150">Visitors</th>
-        <th width="150">View Attendee</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Type</th>
+        <th>Visitors</th>
+        <th>View Attendee</th>
       </thead>
       @foreach ($attendees as $attendee)
         <tr>
@@ -47,13 +47,12 @@
     @else
       <h3>There are no Attendees to Display</h3>
     @endif
- 
-    
-
     </table>
     {{ $attendees->links()}}
   </fieldset>
+  </div>
 
+  <div class="small-12 medium-6 column">
     <form method = "post" action = "{{route('attendee.search')}}">
     {{ csrf_field() }}
       <fieldset>
@@ -71,7 +70,9 @@
         <input class = "button" type = "submit" value = "Search">
       </fieldset>
     </form>
+  </div>
 
+  <div class="small-12 medium-6 column">
     <form method = "post" action = "{{route('attendee.search.date')}}">
     {{ csrf_field() }}
       <fieldset>
@@ -85,11 +86,14 @@
           <input class = "button" type = "submit" value = "Search">
       </fieldset>
     </form>
-
-
-    <form method = "get" action = "{{route('student.status')}}">
-      <input class = "button" type = "submit" value = "View Student Statuses">
-    </form>
+  </div>
+  <div class="small-12 medium-6 column">
+    <fieldset>
+      <legend>Edit Student Statuses</legend>
+      <form method = "get" action = "{{route('student.status')}}">
+        <input class = "button" type = "submit" value = "Edit Student Statuses">
+      </form>
+    </fieldset>
   </div>
 </div>
 

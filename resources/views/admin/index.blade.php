@@ -1,5 +1,5 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
 @section('content')
 
 
@@ -13,7 +13,7 @@
 	<div class = "cont" >
 
 		<ul class=" button-group medium-12 column" >
-			<li><a class= "button medium-12"  href="{{ url('admin/tours') }}">Tours</a></li>
+			<li><a class= "button medium-12" href="{{ url('admin/tours') }}">Tours</a></li>
 			<li><a class= "button medium-12" href="{{ url('admin/majors') }}">Majors</a></li>
 			<li><a class= "button medium-12" href="{{ url('admin/attendees') }}">Attendees</a></li>
 			<li><a class= "button medium-12" href="{{ url('admin/user') }}">Users</a></li>

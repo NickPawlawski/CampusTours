@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
 <ul class="breadcrumbs">
 	<li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
 	<li><a href="{{ url('admin/link') }}">Links</a></li>
@@ -13,10 +11,10 @@
     <div class="small-12 medium-12 columns">
     <h1>Links Page</h1>
     <h2>Create and Edit Links Here</h2>
-    <table>
+    <table class = "small-12 medium-12 columns">
         <thead>
             <th>Name</th>
-            <th>Link</th>
+            <th >Link</th>
             <th>Description</th>
             <th>Active</th>
             <th>Delete</th>

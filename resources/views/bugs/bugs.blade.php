@@ -4,35 +4,27 @@
 
 <ul class="breadcrumbs">
 	<li><a href="{{ action('HomeController@admin') }}">Admin</a></li>
-	<li><a href="{{ url('admin/bugs') }}">Bug Reporter</a></li>
+	<li class = "current"><a href="{{ url('admin/bugs') }}">Bug Reporter</a></li>
 	
 </ul>
 <div>
     <h1>Bug Reporter</h1>
     <h3>Report a Bug</h3>
-    <fieldset>
-    
-			
+    <fieldset>	
         <form method = "POST" action = "{{ route('add.bug') }}"> 
             {{csrf_field()}}
             <label for = "bugName" >Bug Name</label>
             <input type = 'text' name = 'bugName'>
-
             <label for = "page" >Bug Location</label>
             <select name = "page">
                 @foreach($pages as $page)
                     <option value = "{{ $page->id}}">{{$page->name}}</option>
                 @endforeach
             </select>
-
             <label for = "bugDescription" >Bug Description</label>
             <textarea rows = "5" cols = "50"  name = 'bugDescription'></textarea>
-
             <input class = "button" type = 'submit'>
-
         </form>
-           
-		
     </fieldset>
 
     <h3>Reported Bugs</h3>
