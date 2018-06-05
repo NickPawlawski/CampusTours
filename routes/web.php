@@ -92,8 +92,19 @@ Route::group([
     Route::group([
         'prefix' => 'user'
     ], function(){
-        
-
     
     });
+
+
+    Route::group([
+        'prefix' => 'link'
+    ], function(){
+        Route::get('/','LinkController@index');
+        Route::get('/active/{id}','LinkController@changeActive')->name("change.active");
+        Route::post('/','LinkController@addLink')->name("add.link");
+        Route::get('/{id}', 'LinkController@deleteLink')->name("delete.link");
+    });
+
+
+
 });

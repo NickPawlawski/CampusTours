@@ -19,6 +19,7 @@
 			<li><a class= "button medium-12" href="{{ url('admin/user') }}">Users</a></li>
 			<li><a class= "button medium-12" href="{{ url('admin/reportdate') }}">Report</a></li>
 			<li><a class= "button medium-12" href="{{ url('admin/bugs') }}">Report Bug</a></li>
+			<li><a class= "button medium-12" href="{{ url('admin/link') }}">Add Link</a></li>
 		</ul>
 	</div>
 	</fieldset>
